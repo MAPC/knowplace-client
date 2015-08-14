@@ -2,7 +2,10 @@
   "predef": [
     "document",
     "window",
-    "-Promise"
+    "-Promise",
+    "D3",
+    "L",
+    "EmberLeaflet"
   ],
   "browser": true,
   "boss": true,

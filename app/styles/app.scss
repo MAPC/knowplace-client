@@ -1,0 +1,14 @@
+@import 'bower_components/materialize/sass/components/color';
+@import 'bower_components/materialize/sass/components/variables';
+ 
+// Custom color settings go here 
+$primary-color: color("pink", "lighten-2");
+ 
+@import 'bower_components/materialize/sass/materialize';
+@import 'node_modules/ember-cli-materialize/app/styles/ember-cli-materialize';
+// @import 'leaflet.draw.css';
+
+#map {
+  width: 100%;
+  height:500px;
+}
