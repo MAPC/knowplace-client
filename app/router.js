@@ -19,10 +19,18 @@ Router.map(function() {
       });
     });
   });
-  this.resource('profile', { path: 'profiles/:profile_id' });
-  
-  
 
+  this.resource('profile', { path: 'profiles/:profile_id' }, function() {
+    this.resource('places', function() {
+      this.resource('place', { path: '/:place_id' });
+      this.route('new');
+    });
+    
+    this.resource('reports', function() {
+      this.resource('report', { path: '/:report_id' });
+      this.route('new');
+    });
+  });
 });
 
 export default Router;
