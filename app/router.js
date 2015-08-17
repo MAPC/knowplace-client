@@ -31,6 +31,9 @@ Router.map(function() {
       this.route('new');
     });
   });
+  this.route('logout');
+  this.route('login');
+  this.route('protected');
 });
 
 export default Router;
