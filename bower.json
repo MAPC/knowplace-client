@@ -20,6 +20,7 @@
     "d3": "~3.5.6",
     "ember-c3": "~0.1.5",
     "evispa-timo-jsclipper": "*",
-    "concavehull": "~0.1.5"
+    "concavehull": "~0.1.5",
+    "ember-simple-auth": "0.8.0"
   }
 }
