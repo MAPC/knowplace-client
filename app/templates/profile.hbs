@@ -3,5 +3,13 @@
   {{model.content}}
 </div>
 <div class="section">
+  <div class="row">
+    <div class="col s6 center">
+      {{#link-to 'places.new' class='waves-effect waves-light btn'}}Add a Place{{/link-to}}
+    </div>
+    <div class="col s6 center">
+      {{#link-to 'reports.new' class='waves-effect waves-light btn'}}Add a Report{{/link-to}}
+    </div>
+  </div>
   {{outlet}}
 </div>
