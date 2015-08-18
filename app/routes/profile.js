@@ -6,14 +6,10 @@ export default Ember.Route.extend({
   },
   actions: {
     setPlaceState: function(place) {
-      this.get("model").then(function() {
-        value.set('place', place);
-      }, function(error) {
-        console.log("failure.");
-      });
+      this.modelFor('profile').set("place", place);
     },
-    setReportState: function() {
-      alert("Bubbled up!");
+    setReportState: function(report) {
+      this.modelFor('profile').set("report", report);
     }
   }
 });
