@@ -5,7 +5,7 @@ export default Ember.Route.extend({
       googleLogin: function() {
           this.get('session').authenticate('simple-auth-authenticator:torii', 'google-oauth2').then(function () {
               alert("logged in");
-          });;
+          });
           return;
       }
   }

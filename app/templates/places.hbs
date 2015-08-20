@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col s12 m12 l6">
+    <div class="collection">
+    {{#each model}}
+      {{!-- <a class="collection-item"> --}}
+{{!--       {{#link-to 'place' this class="collection-item"}}
+        {{this.name}}: {{this.description}}
+      {{/link-to}} --}}
+      {{!-- </a> --}}
+    {{/each}}
+    </div>
+  </div>
+  <div class="col s12 m12 l6">
+    {{outlet}}
+  </div>
+</div>
