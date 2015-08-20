@@ -1809,9 +1809,21 @@ module.exports = function(app) {
     res.send({
       'place': {
             id: req.params.id,
-            title: "Using Ember CLI to create a Fixture Adapter.",
-            author: "Ryan Christiani",
-            content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium aspernatur quam qui commodi beatae placeat ducimus aliquam veritatis ullam sed! Sit assumenda aspernatur sunt harum accusamus, repellat labore! Repellendus, corporis!"
+            name: "Using Ember CLI to create a Fixture Adapter.",
+            description: "Ryan Christiani",
+            geometry: {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-84.32281494140625,34.9895035675793],
+                  [-81.73690795898438,36.41354670392876],
+                  [-83.616943359375,  34.99850370014629],
+                  [-84.05639648437499,34.985003130171066],
+                  [-84.22119140625,   34.985003130171066],
+                  [-84.32281494140625,34.9895035675793]
+                ]
+              ]
+            }
         }
     });
   });

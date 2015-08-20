@@ -2,12 +2,16 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   queryParams: {
-    search: {
-      refreshModel: true
+    q: {
+      refreshModel: false
     }
   },
   model: function(params) {
-    console.log(params);
-    return this.store.find("place", { search: params.search });
+    return this.store.find("place", {q: params.q });
+  },
+  actions: { 
+    search: function(context) {
+      this.refresh();
+    }
   }
 });

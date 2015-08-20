@@ -1,4 +1,7 @@
 import DS from 'ember-data';
+import { memberAction, collectionAction } from 'npm:ember-api-actions';
+
+const { attr } = DS;
 
 export default DS.Model.extend({
   description: DS.attr('string'),

@@ -11,10 +11,9 @@ Router.map(function() {
     this.resource('profile', { path: ':profile_id' });
   });
 
-  this.resource('places', function() {
-    this.resource('place', { path: ':place_id' });
-    this.route('search', { path: 'places/search/:dynamic' });
-    this.route('new');
+  this.resource('places', { path: ':params' }, function() {
+    this.route('show', { path: ':place_id' });
+    // this.route('search', { path: 'places/search/:dynamic' });
   });
 
   this.resource('reports', function() {
@@ -25,7 +24,6 @@ Router.map(function() {
   this.route('logout');
   this.route('login');
   this.route('protected');
-
 });
 
 export default Router;
