@@ -13,7 +13,7 @@ module.exports = function(defaults) {
   // environments, specify an object as the first parameter. That
   // object's keys should be the environment name and the values
   // should be the asset to use in that environment.
-
+  
   app.import("bower_components/ember-cartodb-adapter/ember-cartodb-adapter.js");
   app.import('bower_components/leaflet-dist/leaflet-src.js');
   app.import('bower_components/leaflet-dist/leaflet.css');

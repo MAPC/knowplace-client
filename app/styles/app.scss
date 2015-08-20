@@ -12,3 +12,7 @@ $primary-color: color("pink", "lighten-2");
   width: 100%;
   height:500px;
 }
+
+.leaflet-control-attribution {
+  display: none;
+}

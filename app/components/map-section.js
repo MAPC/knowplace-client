@@ -12,7 +12,6 @@ export default Ember.Component.extend({
 
   }.observes('geom'),
   updateScope: function() {
-    console.log("updating scope");
     this.map.fitBounds(this.geoJsonLayer.getBounds());
   }.observes('geom'),
 

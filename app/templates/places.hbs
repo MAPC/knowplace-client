@@ -2,13 +2,12 @@
   <div class="col s12 m12 l6">
     <form {{action "search" on="submit"}}>
       {{input value=q placeholder="search"}}
-      <input {{action 'search' this}} class="button" type="submit" value="Search"/>
     </form>
     <div class="collection">
-    {{#each model}}
+    {{#each model as |place|}}
       {{!-- <a class="collection-item"> --}}
-      {{#link-to 'places.show' this class="collection-item"}}
-        {{this.name}}: {{this.description}}
+      {{#link-to 'places.show' place class="collection-item"}}
+        {{place.name}}: {{place.description}}
       {{/link-to}}
       {{!-- </a> --}}
     {{/each}}
@@ -16,5 +15,10 @@
   </div>
   <div class="col s12 m12 l6">
     {{outlet}}
+    <div class="row">
+      <div class="col s12">
+        <button class="button">Use This Geography</button>
+      </div>
+    </div>
   </div>
 </div>
