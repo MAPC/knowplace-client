@@ -6,16 +6,22 @@ export default Ember.Route.extend({
       refreshModel: true
     }
   },
-  afterModel: function() {
-    var place = this.modelFor("places").get("firstObject");
-    this.transitionTo('places.show', place.id);
-  },
+  // afterModel: function() {
+  //   var place = this.modelFor("places").get("firstObject");
+  //   console.log(this.queryParams);
+  //   this.transitionTo('places.show', place.id);
+  // },
+  routeHandler: function() {
+    if (this.get('q') === '') {
+      var place = this.modelFor("places").get("firstObject");
+      this.transitionTo('places.show', place.id);
+    } else {
+
+    }
+  }.observes('q'),
   model: function(params) {
     return this.store.query("place", {name: params.q });
   },
-  dosomething: function() {
-    console.log("Refreshing");
-  }.observes("queryParams.q.refreshModel"),
   actions: { 
     search: function() {
       // this.refresh();

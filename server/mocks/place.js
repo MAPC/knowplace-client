@@ -5,7 +5,7 @@ module.exports = function(app) {
   placeRouter.get('/', function(req, res) {
     res.send({
       'place': [
-        {
+{
             id: 1,
             name: "Using Ember CLI to create a Fixture Adapter.",
             description: "Ryan Christiani",
@@ -38,7 +38,7 @@ module.exports = function(app) {
 
         },
         {
-            id: 3,
+            id: 5,
             name: "Ember, Node, Express and You!",
             description: "Ryan Christiani",
             geometry: {
@@ -1809,7 +1809,7 @@ module.exports = function(app) {
     res.send({
       'place': {
             id: req.params.id,
-            name: "Using Ember CLI to create a Fixture Adapter.",
+            name: "Triangle",
             description: "Ryan Christiani",
             geometry: {
               "type": "Polygon",

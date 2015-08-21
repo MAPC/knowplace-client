@@ -5,6 +5,7 @@ import config from './config/environment';
 
 var App;
 
+Ember.deprecate = function(){};
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
 App = Ember.Application.extend({

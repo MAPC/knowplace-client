@@ -13,8 +13,11 @@ Router.map(function() {
 
   this.resource('places', { path: ':params' }, function() {
     this.route('show', { path: ':place_id' });
+    this.route('new');
     // this.route('search', { path: 'places/search/:dynamic' });
   });
+
+  // this.route('createPlace', { path: 'places/new'});
 
   this.resource('reports', function() {
     this.resource('report', { path: '/:report_id' });

@@ -4,5 +4,5 @@ export default DS.Model.extend({
   title: DS.attr('string'),
   author: DS.attr('string'),
   content: DS.attr('string'),
-  profile: DS.belongsTo('profile')
+  profile: DS.belongsTo('profile', { async: false })
 });
