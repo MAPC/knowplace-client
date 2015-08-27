@@ -7,6 +7,8 @@ export default DS.Model.extend({
   description: DS.attr('string'),
   name: DS.attr('string'),
   geometry: DS.attr(),
+  intersecting: DS. attr(),
+  completed: DS.attr('boolean', { defaultValue: false }),
   profile: DS.belongsTo('profile', { async: false }),
   search: collectionAction({ path: 'search' })
 });

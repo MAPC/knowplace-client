@@ -11,14 +11,14 @@ export default Ember.Route.extend({
   //   console.log(this.queryParams);
   //   this.transitionTo('places.show', place.id);
   // },
-  routeHandler: function() {
-    if (this.get('q') === '') {
-      var place = this.modelFor("places").get("firstObject");
-      this.transitionTo('places.show', place.id);
-    } else {
+  // routeHandler: function() {
+  //   if (this.get('q') === '') {
+  //     var place = this.modelFor("places").get("firstObject");
+  //     this.transitionTo('places.show', place.id);
+  //   } else {
 
-    }
-  }.observes('q'),
+  //   }
+  // }.observes('q'),
   model: function(params) {
     return this.store.query("place", {name: params.q });
   },

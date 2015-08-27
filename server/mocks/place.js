@@ -38,7 +38,7 @@ module.exports = function(app) {
 
         },
         {
-            id: 5,
+            id: 3,
             name: "Ember, Node, Express and You!",
             description: "Ryan Christiani",
             geometry: {
@@ -1801,8 +1801,32 @@ module.exports = function(app) {
     });
   });
 
+  // placeRouter.post('/', function(req, res) {
+  //   res.status(201).end();
+  // });
+
   placeRouter.post('/', function(req, res) {
-    res.status(201).end();
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+    res.send({
+      'places': [
+{
+            id: 4,
+            name: "Using Ember CLI to create a Fixture Adapter.",
+            description: "Ryan Christiani",
+            geometry: {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-84.32281494140625,34.9895035675793],
+                  [-81.73690795898438,36.41354670392876],
+                  [-83.616943359375,  34.99850370014629],
+                  [-84.05639648437499,34.985003130171066],
+                  [-84.22119140625,   34.985003130171066],
+                  [-84.32281494140625,34.9895035675793]
+                ]
+              ]
+            }
+        }]});
   });
 
   placeRouter.get('/:id', function(req, res) {

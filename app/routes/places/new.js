@@ -12,5 +12,8 @@ export default Ember.Route.extend({
         alert("couldn't save place.");
       });
     }
+    // saveGeom(geom) {
+    //   this.controllerFor("places").set("geom", geom);
+    // }
   }
 });
