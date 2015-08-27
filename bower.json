@@ -22,5 +22,9 @@
     "evispa-timo-jsclipper": "*",
     "concavehull": "~0.1.5",
     "ember-simple-auth": "0.8.0"
+  },
+  "resolutions": {
+    "ember-data": "1.13.8",
+    "d3": "~3.5.6"
   }
 }
