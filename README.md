@@ -13,16 +13,26 @@ You will need the following things properly installed on your computer.
 * [Ember CLI](http://www.ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
 
+If you have a Mac, you should install watchman, probably using [Homebrew](http://brew.sh).
+
+```
+brew install watchman
+# OR, for the latest version
+brew install --HEAD watchman
+```
+
+If you get errors that it still can't find watchman or there's something going on with your file system events `FScomputernonsense`, try simply restarting your computer instead of banging your head for an hour. For some reason, [restarting seems to work](http://discuss.emberjs.com/t/watchman-installed-but-ember-cli-cant-find-it/7287/5).
+
 ## Installation
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
+* Run `git clone <repository-url>` this repository
+* Change into the new directory by running `cd <repository-folder>`
+* Run `npm install`
+* Run `bower install`
 
 ## Running / Development
 
-* `ember server`
+* Run `ember server` or `ember s`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
 ### Code Generators

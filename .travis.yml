@@ -21,3 +21,7 @@ install:
 
 script:
   - npm test
+
+addons:
+  code_climate:
+    repo_token: 561e2f49c371688ea1c668919dfd81809e08be0c9f3e489af0a15e546063bdc4
