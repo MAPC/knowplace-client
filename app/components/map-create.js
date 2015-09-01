@@ -13,24 +13,23 @@ export default Ember.Component.extend({
   // geojson: function() {
   //   return new L.geoJson(this.get("input_geom"));
   // }.property("input_geom"),
-  geojson: function() {
-    return new L.geoJson(this.get("geometry"));
-  }.property("geometry"),
-  addLayer: function() {
-    var featureGroup = this.get("featureGroup");
-    var geojson = this.get("geojson");
-    geojson.eachLayer(function(layer) {
-      featureGroup.addLayer(layer);
-    });
-  },
+  // geojson: function() {
+  //   return new L.geoJson(this.get("geometry"));
+  // }.property("geometry"),
+  // addLayer: function() {
+  //   var featureGroup = this.get("featureGroup");
+  //   var geojson = this.get("geojson");
+  //   geojson.eachLayer(function(layer) {
+  //     featureGroup.addLayer(layer);
+  //   });
+  // },
   featureGroup: new L.FeatureGroup(),
   intersect: function() {
     return new L.geoJson(this.get("intersecting"));
   }.property("intersecting"),
   didInsertElement: function() {
-    console.log("Rendered initially once");
     var that = this;
-
+    console.log("Did Insert Element");
     var featureGroup = this.get("featureGroup");
 
     this.map = L.map(this.$('#map').get(0)).setView([42.373611, -71.110556], 12);
@@ -60,7 +59,7 @@ export default Ember.Component.extend({
 
     featureGroup.addTo(this.map);
 
-    this.addLayer();
+    // this.addLayer();
 
     var drawControl = new L.Control.Draw(options);
     this.map.addControl(drawControl);
