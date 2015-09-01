@@ -3,43 +3,47 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   saveGeom: "saveGeom",
-  intersectingLayer: null,
-  drawnLayer: null,
-  drawnFeatureGroup: new L.FeatureGroup(),
-  updateScope: function() {
-    this.map.fitBounds(this.get("intersectingLayer")).getBounds();
-  }.observes('intersectingLayer'),
-  getLocation: function() {
-
-  },
-  makeSqlPolygon: function(coords) {
-    var s = "ST_SETSRID(ST_PolygonFromText(\'POLYGON((";
-    var firstCoord;
-    coords.forEach(function(coord,i){
-      s+=coord.lng + " " + coord.lat + ",";
-
-      //remember the first coord
-      if(i==0) {
-        firstCoord = coord;
-      }
-
-      if(i==coords.length-1) {
-        s+=firstCoord.lng + " " + firstCoord.lat;
-      }
+  classNames: ['fill-map'],
+  input_geom: function() {
+    return this.get("geom");
+  }.property("geom"),
+  geojson: function() {
+    return new L.geoJson(this.get("input_geom"));
+  }.property("input_geom"),
+  // drawnLayer: function() {
+  //   var geometry = this.get('geometry');
+  //   var drawnFeatureGroup = new L.FeatureGroup();
+  //   geometry.eachLayer(function(layer) {
+  //     drawnFeatureGroup.addLayer(layer);
+  //   });
+  //   console.log(drawnFeatureGroup);
+  //   return drawnFeatureGroup;
+  // }.property("geometry"),
+  addLayer: function() {
+    var featureGroup = this.get("featureGroup");
+    var geojson = this.get("geojson");
+    geojson.eachLayer(function(layer) {
+      featureGroup.addLayer(layer);
     });
-    s+="))\'),4326)"
-    return s;
-  },
+    // featureGroup.addLayer(this.get("geojson"));
+  }.observes("geojson"),
+  featureGroup: new L.FeatureGroup(),
+  intersect: function() {
+    return new L.geoJson(this.get("intersecting"));
+  }.property("intersecting"),
   didInsertElement: function() {
     var that = this;
-    var drawnLayer = new L.FeatureGroup();
-    var drawnFeatureGroup = new L.FeatureGroup();
+    // var geometry = this.get("geometry");
+    // var geojson = this.get("geojson");
+    // var drawnLayer = this.get("drawnLayer");
+    var featureGroup = this.get("featureGroup");
+
     this.map = L.map(this.$('#map').get(0)).setView([42.373611, -71.110556], 12);
-    
+
     var options = {
         position: 'topright',
         draw: {
-            polyline:true,
+            polyline:false,
             polygon: {
                 allowIntersection: false, // Restricts shapes to simple polygons
                 drawError: {
@@ -50,53 +54,53 @@ export default Ember.Component.extend({
                     color: '#000000'
                 }
             },
-            circle: false, // Turns off this drawing tool
-            rectangle: {
-                shapeOptions: {
-                    clickable: false
-                }
-            },
+            rectangle: false,
             marker:false
         },
-        featureGroup: drawnFeatureGroup,
         edit: {
           edit: true,
-          featureGroup: drawnFeatureGroup
+          featureGroup: featureGroup
         }
     };
 
+    featureGroup.addTo(this.map);
+
+    if (this.get("geom") !== "") {
+      this.addLayer();
+    }
+
+    // var intersect = this.get("intersect");
+    // intersect.addTo(this.map);
+    // var geojson = this.get("geojson");
+    // geojson.addTo(this.map);
+    // this.updateScope(); //not functional quite yet, needs to be dependent on existence
     var drawControl = new L.Control.Draw(options);
     this.map.addControl(drawControl);
-    this.map.addLayer(drawnFeatureGroup);
-    var customPolygon;
+    // drawnLayer.addTo(this.map);
+
+
     this.map.on('draw:created', function (e) {
-        //hide the arrow
+        var layer = e.layer;
+        featureGroup.addLayer(layer);
 
-        var type = e.layerType,
-            layer = e.layer;
-
-        drawnLayer=e.layer;
-        that.set("drawnLayer", layer.toGeoJSON());
-        drawnFeatureGroup = e;
-        // that.sendAction('getPlaceGeom', that.get("drawnLayer"));
-
-        var coords = e.layer._latlngs;
-        customPolygon = that.makeSqlPolygon(coords);
-        // Do whatever else you need to. (save to db, add to map etc)
-        var queryTemplate = 'https://wilburnforce.cartodb.com/api/v2/sql?q=SELECT the_geom FROM census_tracts a WHERE ST_INTERSECTS(' + customPolygon + ', a.the_geom)&format=geojson';
-        $.getJSON(queryTemplate, function(response) {
-          var serializedResponse = L.geoJson(response);
-          that.set("intersectingLayer", serializedResponse);
-          L.geoJson(response).addTo(that.map);
-          that.map.addLayer(layer);
-          that.sendAction('saveGeom', that.get("drawnLayer"));
-        });
+        // that.set("input_geom", layer.toGeoJSON());
+        that.sendAction('saveGeom', featureGroup.toGeoJSON());
+        console.log(featureGroup.toGeoJSON());
+        // console.log(layer.toGeoJSON());
     });
 
-    
+    this.map.on('draw:deleted', function (e) {
+      alert("deletion has occurred. Needs to bubble to model.");
+    });
+
+    this.map.on('draw:edited', function (e) {
+      alert("edit has occurred. NEeds to bubble to model to persist");
+    });
+
     L.tileLayer('http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.png', {
       attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
       subdomains: 'abcd',
     }).addTo(this.map);
+
   }
 });

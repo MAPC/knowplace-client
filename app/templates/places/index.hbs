@@ -1,9 +1,11 @@
-<div class="collection">
-{{#each model as |place|}}
-  {{!-- <a class="collection-item"> --}}
-  {{#link-to 'places.search.show' place class="collection-item"}}
-    {{place.name}}: {{place.description}}
-  {{/link-to}}
-  {{!-- </a> --}}
-{{/each}}
+<div class="container section">
+  <div class="collection">
+    {{#each model as |place|}}
+      {{!-- <a class="collection-item"> --}}
+      {{#link-to 'places.search.show' place class="collection-item"}}
+        {{place.name}}: {{place.description}}
+      {{/link-to}}
+      {{!-- </a> --}}
+    {{/each}}
+  </div>
 </div>

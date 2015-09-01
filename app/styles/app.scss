@@ -10,9 +10,37 @@ $primary-color: color("pink", "lighten-2");
 
 #map {
   width: 100%;
-  height:500px;
+  height: 100%;
 }
 
 .leaflet-control-attribution {
   display: none;
 }
+
+#index-splash {
+  padding-top: 0;
+}
+
+.slider-height {
+  height: calc(100vh - 500px) !important;
+}
+
+.place-map {
+  height: 500px;
+}
+
+.fill-map {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+// .header {
+//   background-color: rgba(0,0,0,0);
+//   position: absolute;
+//   z-index: 1000;
+// }
+
+// .section-push {
+//   top: 50px;
+// }

@@ -20,7 +20,8 @@ module.exports = function(defaults) {
   app.import('bower_components/ember-leaflet/dist/ember-leaflet.js');
   app.import('bower_components/leaflet-draw/dist/leaflet.draw.js');
   app.import('bower_components/leaflet-draw/dist/leaflet.draw.css');
-  app.import('bower_components/atatus-js/atatus.min.js');
+  // app.import('bower_components/atatus-js/atatus.min.js');
+  app.import('bower_components/materialize/dist/js/materialize.min.js');
   // app.import('bower_components/d3/d3.js');
   // app.import('bower_components/evispa-timo-jsclipper/clipper.js');
   // app.import('bower_components/concavehull/dist/concavehull.js');

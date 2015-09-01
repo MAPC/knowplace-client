@@ -3,12 +3,33 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   previousLayer: new L.featureGroup(),
+  geom: null,
+  classNames: ['fill-map'],
+  zoomControl: false,
+  scrollWheelZoom: true,
+  layers: {
+    underlyingLayer: {
+      geometry: null,
+      previous: null,
+    },
+    drawnLayer: {
+      geometry: null,
+      previous: null,
+    },
+    placeLayer: {
+      geometry: null,
+      previous: null
+    }
+  },
 
   geometry: function () {
     return new L.geoJson(this.get("geom"));
   }.property('geom'),
 
   updateMap: function() {
+    //this observer should be refactored. console logging to see how often this is triggered.
+    console.log("Map component updated");
+
     var previousLayer = this.get('previousLayer');
     var geometry = this.get('geometry');
 
@@ -21,14 +42,20 @@ export default Ember.Component.extend({
 
   didInsertElement: function() {
     //initial DOM rendering
-    this.map = L.map(this.$('#map').get(0));
+    this.map = L.map(this.$('#map').get(0), {
+      zoomControl: this.get("zoomControl"),
+      scrollWheelZoom: this.get("scrollWheelZoom")
+    });
     
-    L.tileLayer('http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.png', {
-      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-      subdomains: 'abcd',
+    L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+      subdomains: 'abcd'
     }).addTo(this.map);
 
-    this.updateMap();
-
+    if (this.get("geom") !== null) {
+      this.updateMap();
+    } else {
+      this.map.locate({setView: true, maxZoom: 16});
+    }
   }
 });

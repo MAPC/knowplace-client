@@ -1,14 +1,14 @@
 <div class="container section">
   <div class="row">
     <div class="col s12 m12 l8 place-map">
-      {{map-create}}
+      {{map-create intersecting=model.intersecting geom=model.geometry}}
     </div>
     <div class="col s12 m12 l4">
       <h4>Describe Your Map</h4>
       <form {{action "search" on="submit"}}>
         {{input value=model.name placeholder="Name"}}
-        {{textarea value=description placeholder="Description" class="materialize-textarea"}}
-        {{input value=tags placeholder="Tags"}}
+        {{textarea value=model.description placeholder="Description" class="materialize-textarea"}}
+        {{input value=model.tags placeholder="Tags"}}
         <div class="center">
           <button {{action "savePlace" this.model}} class="waves-effect waves-light btn">Create Map</button>
         </div>
