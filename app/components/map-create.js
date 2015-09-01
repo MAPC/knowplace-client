@@ -3,39 +3,34 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   saveGeom: "saveGeom",
+  drawCreate:"drawCreate",
+  drawEdit:"drawEdit",
+  drawDelete: "drawDelete",
   classNames: ['fill-map'],
-  input_geom: function() {
-    return this.get("geom");
-  }.property("geom"),
+  // input_geom: function() {
+  //   return this.get("geom");
+  // }.property("geom"),
+  // geojson: function() {
+  //   return new L.geoJson(this.get("input_geom"));
+  // }.property("input_geom"),
   geojson: function() {
-    return new L.geoJson(this.get("input_geom"));
-  }.property("input_geom"),
-  // drawnLayer: function() {
-  //   var geometry = this.get('geometry');
-  //   var drawnFeatureGroup = new L.FeatureGroup();
-  //   geometry.eachLayer(function(layer) {
-  //     drawnFeatureGroup.addLayer(layer);
-  //   });
-  //   console.log(drawnFeatureGroup);
-  //   return drawnFeatureGroup;
-  // }.property("geometry"),
+    return new L.geoJson(this.get("geometry"));
+  }.property("geometry"),
   addLayer: function() {
     var featureGroup = this.get("featureGroup");
     var geojson = this.get("geojson");
     geojson.eachLayer(function(layer) {
       featureGroup.addLayer(layer);
     });
-    // featureGroup.addLayer(this.get("geojson"));
-  }.observes("geojson"),
+  },
   featureGroup: new L.FeatureGroup(),
   intersect: function() {
     return new L.geoJson(this.get("intersecting"));
   }.property("intersecting"),
   didInsertElement: function() {
+    console.log("Rendered initially once");
     var that = this;
-    // var geometry = this.get("geometry");
-    // var geojson = this.get("geojson");
-    // var drawnLayer = this.get("drawnLayer");
+
     var featureGroup = this.get("featureGroup");
 
     this.map = L.map(this.$('#map').get(0)).setView([42.373611, -71.110556], 12);
@@ -65,36 +60,21 @@ export default Ember.Component.extend({
 
     featureGroup.addTo(this.map);
 
-    if (this.get("geom") !== "") {
-      this.addLayer();
-    }
+    this.addLayer();
 
-    // var intersect = this.get("intersect");
-    // intersect.addTo(this.map);
-    // var geojson = this.get("geojson");
-    // geojson.addTo(this.map);
-    // this.updateScope(); //not functional quite yet, needs to be dependent on existence
     var drawControl = new L.Control.Draw(options);
     this.map.addControl(drawControl);
-    // drawnLayer.addTo(this.map);
 
+    this.map.on('draw:created', (e) => {
+      var layer = e.layer;
+      featureGroup.addLayer(layer);
 
-    this.map.on('draw:created', function (e) {
-        var layer = e.layer;
-        featureGroup.addLayer(layer);
+      this.sendAction('drawCreate', e.layer.toGeoJSON());
 
-        // that.set("input_geom", layer.toGeoJSON());
-        that.sendAction('saveGeom', featureGroup.toGeoJSON());
-        console.log(featureGroup.toGeoJSON());
-        // console.log(layer.toGeoJSON());
     });
 
-    this.map.on('draw:deleted', function (e) {
-      alert("deletion has occurred. Needs to bubble to model.");
-    });
-
-    this.map.on('draw:edited', function (e) {
-      alert("edit has occurred. NEeds to bubble to model to persist");
+    this.map.on('draw:edited', (e) => {
+      this.sendAction('drawEdit', e);
     });
 
     L.tileLayer('http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.png', {
