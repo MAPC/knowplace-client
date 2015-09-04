@@ -8,7 +8,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
   actions: {
     setPlaceState: function(place) {
       alert("bubbled");
-      this.modelFor('application').set("place", place);
+      this.modelFor('application').set("places", place);
     },
     setReportState: function(report) {
       this.modelFor('profile').set("report", report);

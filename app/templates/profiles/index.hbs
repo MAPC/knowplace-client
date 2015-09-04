@@ -1,6 +1,11 @@
-<ul>
-{{#each model as |profile|}}
-  <li>{{profile.content}}</li>
-{{/each}}
-</ul>
-{{outlet}}
+<div class="container section">
+  <div class="collection">
+    {{#each model as |profile|}}
+      {{!-- <a class="collection-item"> --}}
+      {{#link-to 'profile' profile class="collection-item"}}
+        {{profile.title}}
+      {{/link-to}}
+      {{!-- </a> --}}
+    {{/each}}
+  </div>
+</div>

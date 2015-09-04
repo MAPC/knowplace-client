@@ -23,15 +23,33 @@ export default Ember.Component.extend({
   //     featureGroup.addLayer(layer);
   //   });
   // },
+  updateIntersecting: function() {
+    var update = this.get('intersectingGroup');
+    console.log("got an intersecting update:", update);
+    update.clearLayers();
+    update.addLayer(L.geoJson(this.get('underlying')));
+  }.observes('underlying'),
+  updateGeometry: function() {
+    var update = this.get('featureGroup');
+    console.log('got a geometry update:', update);
+    update.clearLayers();
+    L.geoJson(this.get('geometry')).eachLayer((layer) => {
+      update.addLayer(layer);
+    });
+  }.observes('geometry'),
+  // test: function() {
+  //   alert(this.get('name')); //does this component have access to model properties?
+  // }.observes('geometry'),
   featureGroup: new L.FeatureGroup(),
-  intersect: function() {
-    return new L.geoJson(this.get("intersecting"));
-  }.property("intersecting"),
+  intersectingGroup: new L.FeatureGroup(),
+  // intersect: function() {
+  //   return new L.geoJson(this.get("intersecting"));
+  // }.property("intersecting"),
   didInsertElement: function() {
+    console.log("drawn once");
     var that = this;
-    console.log("Did Insert Element");
     var featureGroup = this.get("featureGroup");
-
+    var intersectingGroup = this.get("intersectingGroup");
     this.map = L.map(this.$('#map').get(0)).setView([42.373611, -71.110556], 12);
 
     var options = {
@@ -58,6 +76,7 @@ export default Ember.Component.extend({
     };
 
     featureGroup.addTo(this.map);
+    intersectingGroup.addTo(this.map);
 
     // this.addLayer();
 
@@ -73,7 +92,13 @@ export default Ember.Component.extend({
     });
 
     this.map.on('draw:edited', (e) => {
-      this.sendAction('drawEdit', e);
+      console.log("Starting to edit");
+      console.log(e.layers);
+      var layers = e.layers;
+      layers.eachLayer((layer) => {
+        this.sendAction('drawEdit', layer.toGeoJSON());
+      });
+      // this.sendAction('drawEdit', e.layer.toGeoJSON());
     });
 
     L.tileLayer('http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.png', {

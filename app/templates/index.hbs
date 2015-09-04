@@ -1,14 +1,13 @@
-{{!-- {{splash-slider}} --}}
 <div class="slider-height">
   {{map-view zoomControl=false scrollWheelZoom=false}}
 </div>
 <div class="container section">
-  <h5 class="center-align"> The Neighborhood Drawing Tool features dozens of custom reports on any neighborhood, city or area of your choosing.</h5>
+  <h5>The Neighborhood Drawing Tool features dozens of custom reports on any area of your choosing.</h5>
   <div class="row">
     <form class="col s12" {{action "search" on="submit"}}>
       <div class="row">
         <div class="input-field col l10 s12">
-          {{input valueBinding="criteria" id="search_crit" type="text" size="50" autofocus="true"}}
+          {{input value=criteria id="search_crit" type="text" size="50" autofocus="true"}}
           <label for="search_crit">Search for a Geography</label>
         </div>
         <div class="input-field col l2 s12">
@@ -25,7 +24,7 @@
         </div>
         <div class="col l12 s12 center-align">
           {{!-- <a class="waves-effect waves-light btn">Create</a> --}}
-          {{#link-to 'places.new' class="waves-effect waves-light btn"}}Create{{/link-to}}
+          {{#link-to 'places.create.new' class="waves-effect waves-light btn"}}Create Place{{/link-to}}
         </div>
       </div>
     </div>
@@ -35,7 +34,7 @@
           <i class="material-icons large">layers</i>
         </div>
         <div class="col l12 s12 center-align">
-          {{#link-to 'places' class="waves-effect waves-light btn"}}Browse{{/link-to}}
+          {{#link-to 'reports.search' class="waves-effect waves-light btn"}}Browse Reports{{/link-to}}
         </div>
       </div>
     </div>

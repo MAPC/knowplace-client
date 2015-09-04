@@ -20,7 +20,7 @@ export default Ember.Route.extend({
   //   }
   // }.observes('q'),
   model: function(params) {
-    return this.store.query("place", {q: params.q });
+    return this.store.query("report", {q: params.q });
   },
   actions: { 
     search: function() {
