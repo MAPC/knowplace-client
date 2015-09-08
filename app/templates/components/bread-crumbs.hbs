@@ -1,6 +1,16 @@
-<div class="col s6 center">
-  Current Place: {{profile.place.title}}
-</div>
-<div class="col s6 center">
-  Current Report: {{profile.report.title}}
-</div>
+Test
+{{#if model.profiles}}
+  <div class="pink darken-1">
+    <div class="col s6 center">
+      Current State:
+      {{#if model.profiles.places}}
+        Current Place: {{model.places.name}}
+      {{else}}
+
+      {{/if}}
+    </div>
+    <div class="col s6 center">
+      {{!-- Current Report: {{model.report.title}} --}}
+    </div>
+  </div>
+{{/if}}

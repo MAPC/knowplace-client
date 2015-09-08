@@ -1,9 +1,23 @@
-<h4>Step 2: Refine and Describe</h4>
+{{!-- <h4>Step 2: Refine and Describe</h4>
 <form {{action "search" on="submit"}}>
   {{input value=model.name placeholder="Name"}}
   {{textarea value=model.description placeholder="Description" class="materialize-textarea"}}
   {{input value=model.tags placeholder="Tags"}}
   <div class="center">
-    <a {{action "savePlace" this.model}} class="waves-effect waves-light btn">Create Place ></a>
+    <a {{action "save" this.model}} class="modal-trigger waves-effect waves-light btn">Create Place ></a>
   </div>
-</form>
+</form> --}}
+{{!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> --}}
+
+<!-- Modal Structure -->
+{{!-- <div id="modal1" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>Modal Header</h4>
+    <p>A bunch of text</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div> --}}
+Step 2: Provide Information
+{{edit-place-form model=this.model profiles=this.profiles.profiles}}

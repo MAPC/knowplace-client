@@ -1,9 +1,9 @@
 import DS from 'ember-data';
 
 export default DS.JSONAPIAdapter.extend({
-  namespace: 'api', //need this for mocks!
-  // host: 'http://knowplace.dev.mapc.org' //dev api
-  host: 'http://localhost:4200'
+  // namespace: 'api', //need this for mocks!
+  host: 'http://knowplace.dev.mapc.org' //dev api
+  // host: 'http://localhost:4200'
 });
 
 // DS.Store.reopen({

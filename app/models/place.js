@@ -11,6 +11,6 @@ export default DS.Model.extend({
   underlying: DS.attr(),
   test_data: DS.attr(),
   completed: DS.attr('boolean', { defaultValue: false }),
-  profile: DS.hasMany('profile', { async: true }),
+  profile: DS.hasMany('profile', { async: true, polymorphic: true }),
   search: collectionAction({ path: 'search' })
 });

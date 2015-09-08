@@ -1,2 +1,15 @@
-<h1>{{model.title}}</h1>
-<p>{{model.description}}</p>
+<div class="row">
+  <div class="col s12">
+    <h1>{{model.title}}</h1>
+    <p>{{model.description}}</p>
+    <div class="collection">
+      <a class="collection-item">Walkshed Score</a>
+      <a class="collection-item active">WalkScore</a>
+      <a class="collection-item">Income</a>
+      <a class="collection-item">Households</a>
+    </div>
+  </div>
+  <div class="col s12">
+    <button {{action "savePlace" this.model}} class="waves-effect waves-light btn">Add Report</button>
+  </div>
+</div>

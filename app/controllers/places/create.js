@@ -1,21 +1,26 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  content: {},
+  place: {},
   actions: {
-    drawEdit:function(update) {
-      console.log(update);
-      this.get('model').set('geometry',update);
-      this.get('model').save();
-      Materialize.toast('Place Updated', 4000);
-    },
     drawCreate:function(geom) {
-      this.get('model').set('geometry', geom);
-      this.get('model').set('name', this.get('name')).set('description', this.get('description'));
-      this.get('model').save().then((model) => {
+      this.get('model.place').set('geometry', geom);
+      this.get('model.place').set('name', this.get('name')).set('description', this.get('description'));
+      this.get('model.place').save().then((model) => {
         this.transitionToRoute("places.create.edit", model);
       }, (error) => {
         console.log(error);
       });
+    },
+    drawEdit:function(update) {
+      console.log(update);
+      this.get('model.place').set('geometry',update);
+      this.get('model.place').save();
+      Materialize.toast('Place Updated', 4000);
+    },
+    savePlace: function(context) {
+      alert("controller has place");
     }
   }
 });

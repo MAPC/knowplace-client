@@ -23,8 +23,16 @@ export default Ember.Route.extend({
     return this.store.query("report", {q: params.q });
   },
   actions: { 
-    search: function() {
-      // this.refresh();
+    savePlace: function(context) {
+      var report = context;
+      var user = this.modelFor("application");
+      // place.save().then((model) => {
+      var profile = this.store.createRecord('profile', {});
+      profile.set("report", report);
+      profile.save().then((profile) => {
+        user.set("profiles", [profile]);
+        this.transitionTo("profile", profile);
+      });
     }
   }
 });

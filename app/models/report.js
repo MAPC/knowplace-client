@@ -4,5 +4,5 @@ export default DS.Model.extend({
   title: DS.attr('string'),
   description: DS.attr('string'),
   official: DS.attr('boolean', { defaultValue: false }),
-  profile: DS.belongsTo('profile', { async: true })
+  profile: DS.hasMany('profile', { async: true, polymorphic: true })
 });

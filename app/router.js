@@ -9,7 +9,10 @@ Router.map(function() {
   this.resource('profiles', function() {
     this.route('new');
     this.resource('profile', { path: ':profile_id' }, function() {
-      this.route('places');
+      this.resource('reports', function() {
+        // this.resource('report', { path: ':report_id' });
+      });
+
     });
   });
 
@@ -36,6 +39,7 @@ Router.map(function() {
   this.route('logout');
   this.route('login');
   this.route('protected');
+
 });
 
 export default Router;

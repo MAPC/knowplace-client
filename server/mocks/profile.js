@@ -3,16 +3,37 @@ module.exports = function(app) {
   var profileRouter = express.Router();
 
   profileRouter.get('/', function(req, res) {
-    var json = {data:[{id:"1",type:"profiles",links:{self:"http://knowplace.dev.mapc.org/profiles/1"},attributes:{title:"Transit Oriented Development in Dudley Square"},relationships: {place: { data: { id: 1, type: "places" }, links:{self:"http://knowplace.dev.mapc.org/profiles/1/relationships/place",related:"http://knowplace.dev.mapc.org/profiles/1/place"}},report:{links:{self:"http://knowplace.dev.mapc.org/profiles/1/relationships/report",related:"http://knowplace.dev.mapc.org/profiles/1/report"}}}}],links:{first:"http://knowplace.dev.mapc.org/profiles?page%5Bnumber%5D=1&page%5Bsize%5D=10",last:"http://knowplace.dev.mapc.org/profiles?page%5Bnumber%5D=1&page%5Bsize%5D=10"}};
+    var json = {data:[{id:"1",type:"profiles",links:{self:"/api/profiles/1"},attributes:{title:"Transit Oriented Development in Dudley Square"},relationships: {place: { data: { id: 1, type: "places" }, links:{self:"/api/profiles/1/relationships/place",related:"/api/profiles/1/place"}},report:{links:{self:"/api/profiles/1/relationships/report",related:"/api/profiles/1/report"}}}}],links:{first:"/api/profiles?page%5Bnumber%5D=1&page%5Bsize%5D=10",last:"/api/profiles?page%5Bnumber%5D=1&page%5Bsize%5D=10"}};
+    res.send(json);
+  });
+
+  profileRouter.get('/:id/place', function(req, res) {
+    var json = {"data":{"id":"1","type":"places","links":{"self":"api/places/1"},"attributes":{"name":"Dudley Square","description":"The primary commercial center of the Roxbury neighborhood of Boston, at the intersection of Dudley Street and Washington Street.\n","geometry":{"type":"Polygon","coordinates":[[[-71.075366,42.328243],[-71.0660963,42.3236742],[-71.0718898,42.3066331],[-71.0721044,42.3191684],[-71.0750226,42.3247847],[-71.075366,42.328243]]]},"completed":false,"underlying":null,"geoids":null}}};
     res.send(json);
   });
 
   profileRouter.post('/', function(req, res) {
-    res.status(201).end();
+    var json = {
+                    data: {
+                        id: "1",
+                        type: "profiles",
+                        links: {
+                            self: "/api/profiles/1"
+                        },
+                        attributes: {
+                            title: "Transit Oriented Development in Dudley Square"
+                        }
+                    },
+                    links: {
+                        self: "/api/places/1"
+                    }
+                };
+
+    res.send(json).end();
   });
 
   profileRouter.get('/:id', function(req, res) {
-    var json = {data:{id:req.params.id,type:"profiles",links:{self:"profiles/1"},attributes:{title:"Transit Oriented Development in Dudley Square"},relationships:{place:{ data: { type: "place", "id": 1 }, links:{self:"/profiles/1/relationships/place",related:"/profiles/1/place"}},report:{links:{self:"/profiles/1/relationships/report",related:"/profiles/1/report"}}}}};
+    var json = {data:{id:req.params.id,type:"profiles",links:{self:"profiles/1"},attributes:{title:"Transit Oriented Development in Dudley Square"},relationships:{place:{ data: { type: "place", "id": 1 }, links:{self:"/api/profiles/1/relationships/place",related:"/api/profiles/1/place"}},report:{links:{self:"/api/profiles/1/relationships/report",related:"/api/profiles/1/report"}}}}};
     res.send(json);
   });
 
