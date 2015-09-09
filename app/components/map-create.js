@@ -7,6 +7,21 @@ export default Ember.Component.extend({
   drawEdit:"drawEdit",
   drawDelete: "drawDelete",
   classNames: ['fill-map'],
+  styles: {
+    underlying: {
+      fillColor: "#ff00ff",
+      fillOpacity: .5,
+      color: "#ff00ff",
+      weight: 3
+    },
+    geometry: {
+      fillColor: "#23b9a9",
+      fillOpacity: .8,
+      stroke: false,
+      lineCap: "round",
+      lineJoin: "round"
+    }
+  },
   // input_geom: function() {
   //   return this.get("geom");
   // }.property("geom"),
@@ -27,14 +42,16 @@ export default Ember.Component.extend({
     var update = this.get('intersectingGroup');
     console.log("got an intersecting update:", update);
     update.clearLayers();
-    update.addLayer(L.geoJson(this.get('underlying')));
+    update.addLayer(L.geoJson(this.get('underlying'), { style: this.get('styles').underlying }));
+    this.map.fitBounds(update.getBounds());
+    update.bringToBack();
   }.observes('underlying'),
   updateGeometry: function() {
     var update = this.get('featureGroup');
     console.log('got a geometry update:', update);
     update.clearLayers();
     L.geoJson(this.get('geometry')).eachLayer((layer) => {
-      update.addLayer(layer);
+      update.addLayer(layer.setStyle(this.get("styles").geometry));
     });
   }.observes('geometry'),
   // test: function() {
@@ -67,7 +84,8 @@ export default Ember.Component.extend({
                 }
             },
             rectangle: false,
-            marker:false
+            marker:false,
+            circle: false
         },
         edit: {
           edit: true,
@@ -77,6 +95,8 @@ export default Ember.Component.extend({
 
     featureGroup.addTo(this.map);
     intersectingGroup.addTo(this.map);
+
+
 
     // this.addLayer();
 
@@ -101,7 +121,7 @@ export default Ember.Component.extend({
       // this.sendAction('drawEdit', e.layer.toGeoJSON());
     });
 
-    L.tileLayer('http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.png', {
+    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
       attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
       subdomains: 'abcd',
     }).addTo(this.map);

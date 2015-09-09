@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import ResetScrollMixin from 'neighborhood-drawing-tool/mixins/reset-scroll';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(ResetScrollMixin, {
   queryParams: {
     q: {
       refreshModel: true
@@ -20,19 +21,35 @@ export default Ember.Route.extend({
   //   }
   // }.observes('q'),
   model: function(params) {
-    return this.store.query("report", {q: params.q });
+    return Ember.RSVP.hash({
+      reports: this.store.query("report", {q: params.q }),
+      profiles: this.store.findAll('profile')
+    })
   },
   actions: { 
-    savePlace: function(context) {
+    saveReport: function(context) {
       var report = context;
-      var user = this.modelFor("application");
+      var profile = this.modelFor("application");
       // place.save().then((model) => {
-      var profile = this.store.createRecord('profile', {});
+      // var profile = this.store.createRecord('profile', {});
       profile.set("report", report);
       profile.save().then((profile) => {
-        user.set("profiles", [profile]);
         this.transitionTo("profile", profile);
       });
+    },
+    relateProfile: function(profile_id, report) {
+      var user = this.modelFor("application");
+      this.store.findRecord('profile', profile_id).then((profile) => {
+        report.save().then((report) => {
+          profile.set("report", report);
+          profile.save().then((profile) => {
+            this.transitionTo("profile", profile);
+          }, (error) => {
+            console.log(error);
+          });
+        });
+      });
+      // console.log(profile.id);
     }
   }
 });

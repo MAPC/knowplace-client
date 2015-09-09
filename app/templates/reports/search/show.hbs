@@ -2,14 +2,16 @@
   <div class="col s12">
     <h1>{{model.title}}</h1>
     <p>{{model.description}}</p>
-    <div class="collection">
-      <a class="collection-item">Walkshed Score</a>
-      <a class="collection-item active">WalkScore</a>
-      <a class="collection-item">Income</a>
-      <a class="collection-item">Households</a>
-    </div>
+    DataPoints:
+    <ul class="collection">
+      <li class="collection-item">Walkshed Score</li>
+      <li class="collection-item">WalkScore</li>
+      <li class="collection-item">Income</li>
+      <li class="collection-item">Households</li>
+    </ul>
   </div>
   <div class="col s12">
-    <button {{action "savePlace" this.model}} class="waves-effect waves-light btn">Add Report</button>
+    {{!-- {{profiles-list-modal profiles=this.profiles model=this.model}} --}}
+    <a {{action "saveReport" model}} href="#!" class="modal-action modal-close waves-effect waves-green btn">Add to Profile</a>
   </div>
 </div>

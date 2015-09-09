@@ -1,5 +1,6 @@
 @import 'bower_components/materialize/sass/components/color';
 @import 'bower_components/materialize/sass/components/variables';
+@import 'bower_components/semantic-ui-divider/divider.css';
  
 // Custom color settings go here 
 $primary-color: color("pink", "lighten-2");
@@ -37,6 +38,9 @@ $primary-color: color("pink", "lighten-2");
   height: 100%;
 }
 
+.bread-crumbs {
+  margin-bottom: 0px;
+}
 // .header {
 //   background-color: rgba(0,0,0,0);
 //   position: absolute;

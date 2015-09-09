@@ -6,9 +6,10 @@
         <div class="col l12 s12 center-align">
           <i class="material-icons large">border_clear</i>
         </div>
-        <div class="col l12 s12 center-align">
+        <div class="col l12 s12 center-align place-map">
           {{#if model.place}}
             <p>{{model.place.name}}</p>
+            {{map-view geom=model.place.geometry}}
           {{else}}
             {{#link-to 'places.search' class='waves-effect waves-light btn'}}Add a Place{{/link-to}}
           {{/if}}

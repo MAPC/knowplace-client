@@ -1,16 +1,26 @@
-Test
-{{#if model.profiles}}
-  <div class="pink darken-1">
-    <div class="col s6 center">
-      Current State:
-      {{#if model.profiles.places}}
-        Current Place: {{model.places.name}}
-      {{else}}
-
-      {{/if}}
+{{#if profile.started}}
+  {{#if profile.completed}}
+    <div class="row pink darken-4 bread-crumbs">
+      <div class="col l12 center white-text">
+        Profile Finished! {{#link-to 'profile' profile}}View Profile{{/link-to}}
+      </div>
     </div>
-    <div class="col s6 center">
-      {{!-- Current Report: {{model.report.title}} --}}
+  {{else}}
+    <div class="row pink darken-4">
+      <div class="col l6 center white-text">
+        {{#if profile.place}}
+          Current Place: {{profile.place.name}}
+        {{else}}
+          {{#link-to 'places.search'}}Create/Select Place{{/link-to}}
+        {{/if}}
+      </div>
+      <div class="col l6 center white-text">
+        {{#if profile.report}}
+          Current Report: {{profile.report.title}}
+        {{else}}
+          {{#link-to 'reports.search'}}Create/Select Report{{/link-to}}
+        {{/if}}
+      </div>
     </div>
-  </div>
+  {{/if}}
 {{/if}}

@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import ResetScrollMixin from 'neighborhood-drawing-tool/mixins/reset-scroll';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(ResetScrollMixin, {
   model: function() {
     return Ember.RSVP.hash({
       place: this.store.createRecord('place', {}),
@@ -9,14 +10,13 @@ export default Ember.Route.extend({
   },
   actions: {
     savePlace: function(context) {
-      alert("bubbled");
+      // alert("bubbled");
       var place = this.modelFor("places.create").place;
-      var user = this.modelFor("application");
+      var profile = this.modelFor("application");
       place.save().then((model) => {
-        var profile = this.store.createRecord('profile', {});
+        // var profile = this.store.createRecord('profile', {});
         profile.set("place", place);
         profile.save().then((profile) => {
-          user.set("profiles", [profile]);
           this.transitionTo("profile", profile);
         });
         

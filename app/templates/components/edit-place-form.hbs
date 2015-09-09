@@ -11,22 +11,11 @@
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
   <div class="modal-content">
-    <div class="row">
-      <div class="col s6">
-        <h4>Select a Profile to Add this Place to:</h4>
-          <div class="collection">
-            {{#each profiles as |profile|}}
-              <a href="#" {{action "relateProfile" profile.id}} class="collection-item">Profile: {{profile.id}}</a>
-            {{/each}}
-          </div>
-      </div>
-      <div class="col s6 valign-wrapper">
-        <div class="valign">
-          <h4>Create a New Profile</h4>
-          <a {{action "savePlace" place}} href="#!" class="modal-action modal-close waves-effect waves-green btn">Create New Profile</a>
-        </div>
-      </div>
-    </div>
+    <h4>Are you sure you want to save this place?</h4>
+    <p>Press escape to go back.</p>
   </div>
+  <div class="modal-footer">
+      <a {{action "savePlace" place}} href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Save Place and Continue</a>
+    </div>
 </div>
 {{yield}}

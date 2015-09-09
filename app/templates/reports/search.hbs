@@ -5,7 +5,7 @@
         {{input value=q placeholder="search"}}
       </form>
       <div class="collection">
-      {{#each model as |report|}}
+      {{#each this.model.reports as |report|}}
         {{!-- <a class="collection-item"> --}}
         {{#link-to 'reports.search.show' report class="collection-item"}}
           {{report.title}}
