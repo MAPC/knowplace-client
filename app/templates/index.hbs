@@ -2,39 +2,64 @@
   {{map-view zoomControl=false scrollWheelZoom=false}}
 </div>
 <div class="container section">
-  <h5>The Neighborhood Drawing Tool features dozens of reports on a number of topics for any area of your choosing.</h5>
+  <h5>The Neighborhood Drawing Tool features dozens of reports on a number of topics for any area of your choosing. To start, search for or draw a place:</h5>
   <div class="row">
     <form class="col s12" {{action "search" on="submit"}}>
       <div class="row">
-        <div class="input-field col l10 s12">
+        <div class="input-field col l3 s12">
           {{input value=criteria id="search_crit" type="text" size="50" autofocus="true"}}
           <label for="search_crit">Search for a Place</label>
         </div>
         <div class="input-field col l2 s12">
           <a class="waves-effect waves-light btn" {{action "search"}}>Go</a>
         </div>
-      </div>
-    </form>
-  </div>
-  <div class="row">
-    <div class="col l6 s12">
-      <div class="row">
-        <div class="col l12 s12 center-align">
-          <i class="material-icons large">border_clear</i>
+        <div class="input-field col l2 center-align">
+          <h5>- OR -</h5>
         </div>
-        <div class="col l12 s12 center-align">
-          {{!-- <a class="waves-effect waves-light btn">Create</a> --}}
+        <div class="input-field col l5 center-align">
           {{#link-to 'places.create.new' class="waves-effect waves-light btn"}}Create Place{{/link-to}}
         </div>
       </div>
+    </form>
+  </div>
+  <div class="row divider">
+  </div>
+  <div class="row center-align">
+    <h5>How It Works</h5>
+    <p class="flow-text"><i class="material-icons small">layers</i> Place + <i class="material-icons small">format_align_left</i> Report = <i class="material-icons small">assignment_turned_in</i> Profile</p>
+    <p>Select a place you want to study, a report on the data you're interested in, and we'll generate the profile.</p>
+  </div>
+  <div class="row divider">
+  </div>
+  <div class="row">
+    <h5>Browse other resources:</h5>
+    <div class="col l4 s12">
+      <div class="row">
+        <div class="col l12 s12 center-align">
+          <i class="material-icons large">format_align_left</i>
+        </div>
+        <div class="col l12 s12 center-align">
+          {{#link-to 'reports.search' class="waves-effect waves-light btn"}}Browse Reports{{/link-to}}
+        </div>
+      </div>
     </div>
-    <div class="col l6 s12">
+    <div class="col l4 s12">
       <div class="row">
         <div class="col l12 s12 center-align">
           <i class="material-icons large">layers</i>
         </div>
         <div class="col l12 s12 center-align">
-          {{#link-to 'reports.search' class="waves-effect waves-light btn"}}Browse Reports{{/link-to}}
+          {{#link-to 'places.search' class="waves-effect waves-light btn"}}Browse Places{{/link-to}}
+        </div>
+      </div>
+    </div>
+    <div class="col l4 s12">
+      <div class="row">
+        <div class="col l12 s12 center-align">
+          <i class="material-icons large">assignment_turned_in</i>
+        </div>
+        <div class="col l12 s12 center-align">
+          {{#link-to 'profiles' class="waves-effect waves-light btn"}}Browse Profiles{{/link-to}}
         </div>
       </div>
     </div>

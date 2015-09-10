@@ -22,8 +22,12 @@ $primary-color: color("pink", "lighten-2");
   padding-top: 0;
 }
 
+.divider {
+  border-top:1px solid #EEE;
+}
+
 .slider-height {
-  height: calc(100vh - 250px) !important;
+  height: calc(100vh - 290px) !important;
 }
 
 .place-map {
