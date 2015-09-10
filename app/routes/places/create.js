@@ -16,8 +16,13 @@ export default Ember.Route.extend(ResetScrollMixin, {
       place.save().then((model) => {
         // var profile = this.store.createRecord('profile', {});
         profile.set("place", place);
-        profile.save().then((profile) => {
-          this.transitionTo("profile", profile);
+        profile.save().then((responseProfile) => {
+          if (profile.get("hasReport")) {
+            this.transitionTo("profile", responseProfile);
+          } else {
+            this.transitionTo("reports.search");
+          }
+          
         });
         
 

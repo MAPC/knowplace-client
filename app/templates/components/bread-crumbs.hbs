@@ -1,27 +1,29 @@
-{{#if profile.started}}
-  {{#if profile.completed}}
-    <div class="row pink darken-4 bread-crumbs">
-      <div class="col l12 center white-text">
-        Profile Finished! {{#link-to 'profile' profile}}View Profile{{/link-to}}
-      </div>
+{{!-- {{#if profile.started}} --}}
+  <div class="row bread-crumbs valign-wrapper">
+
+      {{#if profile.hasPlace}}
+        Step 1: Selected Place {{profile.place.name}}
+      {{else}}
+        Step 1: {{#link-to 'places.search'}}Create/Select Place{{/link-to}}
+      {{/if}}
+        <i class="material-icons right large">keyboard_arrow_right</i>
+
+    <div class="col l4">
+
+      {{#if profile.hasReport}}
+        Step 2: Selected Place: {{profile.report.title}}
+      {{else}}
+        Step 2: {{#link-to 'places.search'}}Create/Select Report{{/link-to}}
+      {{/if}}
+        <i class="material-icons right large">keyboard_arrow_right</i>
+
     </div>
-  {{else}}
-    <div class="row pink darken-4">
-      <div class="col l4 center white-text">Where you are so far:</div>
-      <div class="col l4 center white-text">
-        {{#if profile.place}}
-          Current Place: {{profile.place.name}}
-        {{else}}
-          {{#link-to 'places.search'}}Create/Select Place{{/link-to}}
-        {{/if}}
-      </div>
-      <div class="col l4 center white-text">
-        {{#if profile.report}}
-          Current Report: {{profile.report.title}}
-        {{else}}
-          {{#link-to 'reports.search'}}Create/Select Report{{/link-to}}
-        {{/if}}
-      </div>
+    <div class="col l4">
+      {{#if profile.completed}}
+        Step 3: Profile Finished! {{#link-to 'profile' profile}}View Profile{{/link-to}}
+      {{else}}
+        Step 3: View your Completed Profile
+      {{/if}}
     </div>
-  {{/if}}
-{{/if}}
+  </div>
+{{!-- {{/if}}  --}}

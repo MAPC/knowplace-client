@@ -33,8 +33,13 @@ export default Ember.Route.extend(ResetScrollMixin, {
       // place.save().then((model) => {
       // var profile = this.store.createRecord('profile', {});
       profile.set("report", report);
-      profile.save().then((profile) => {
-        this.transitionTo("profile", profile);
+      profile.save().then((responseProfile) => {
+        console.log(profile.get("place").id)
+        if (profile.get("hasPlace")) {
+          this.transitionTo("profile", responseProfile);
+        } else {
+          this.transitionTo("places.search");
+        }
       });
     },
     relateProfile: function(profile_id, report) {

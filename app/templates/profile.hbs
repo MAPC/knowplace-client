@@ -1,34 +1,162 @@
-<div class="section container">
-  <h3>Welcome to Your Data Profile</h3>
-  <div class="row">
-    <div class="col l6 s12">
-      <div class="row">
-        <div class="col l12 s12 center-align">
-          <i class="material-icons large">border_clear</i>
-        </div>
-        <div class="col l12 s12 center-align place-map">
-          {{#if model.place}}
-            <p>{{model.place.name}}</p>
-            {{map-view geom=model.place.geometry}}
-          {{else}}
-            {{#link-to 'places.search' class='waves-effect waves-light btn'}}Add a Place{{/link-to}}
-          {{/if}}
-        </div>
+{{#if model.completed}}
+  <div class="section container">
+    <p class="flow-text"><strong>Focused Profile: {{model.title}}</strong></p>
+    <div class="row">
+      <div class="col l8 s12">
+        Icons
+      </div>
+      <div class="col l4 s12">
+        <h3>{{model.place.name}}</h3>
       </div>
     </div>
-    <div class="col l6 s12">
-      <div class="row">
-        <div class="col l12 s12 center-align">
-          <i class="material-icons large">layers</i>
-        </div>
-        <div class="col l12 s12 center-align">
-          {{#if model.report}}
-            {{model.report.title}}
-          {{else}}
-            {{#link-to 'reports.search' class='waves-effect waves-light btn'}}Add a Report{{/link-to}}
-          {{/if}}
-        </div>
+    <div class="row">
+      <div class="col l8 s12">
+        <p class="flow-text">
+          Transit Oriented Development (TOD) is a strategy for developing residential and commercial areas in places that are already accessible by public transit.
+          {{model.report.description}}
+        </p>
+      </div>
+      <div class="col l4 s12 place-map-profile">
+        {{map-view underlying=model.place.underlying geom=model.place.geometry}}
       </div>
     </div>
+    <table class="responsive-table">
+      <thead>
+        <tr>
+            <th data-field="id">Name</th>
+            <th data-field="name">Item Name</th>
+            <th data-field="price">Item Price</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Alvin</td>
+          <td>Eclair</td>
+          <td>$0.87</td>
+        </tr>
+        <tr>
+          <td>Alan</td>
+          <td>Jellybean</td>
+          <td>$3.76</td>
+        </tr>
+        <tr>
+          <td>Jonathan</td>
+          <td>Lollipop</td>
+          <td>$7.00</td>
+        </tr>
+        <tr>
+          <td>Jonathan</td>
+          <td>Lollipop</td>
+          <td>$7.00</td>
+        </tr>
+        <tr>
+          <td>Jonathan</td>
+          <td>Lollipop</td>
+          <td>$7.00</td>
+        </tr>
+        <tr>
+          <td>Jonathan</td>
+          <td>Lollipop</td>
+          <td>$7.00</td>
+        </tr>
+        <tr>
+          <td>Alvin</td>
+          <td>Eclair</td>
+          <td>$0.87</td>
+        </tr>
+        <tr>
+          <td>Alan</td>
+          <td>Jellybean</td>
+          <td>$3.76</td>
+        </tr>
+        <tr>
+          <td>Jonathan</td>
+          <td>Lollipop</td>
+          <td>$7.00</td>
+        </tr>
+        <tr>
+          <td>Jonathan</td>
+          <td>Lollipop</td>
+          <td>$7.00</td>
+        </tr>
+        <tr>
+          <td>Jonathan</td>
+          <td>Lollipop</td>
+          <td>$7.00</td>
+        </tr>
+        <tr>
+          <td>Jonathan</td>
+          <td>Lollipop</td>
+          <td>$7.00</td>
+        </tr>
+        <tr>
+          <td>Alvin</td>
+          <td>Eclair</td>
+          <td>$0.87</td>
+        </tr>
+        <tr>
+          <td>Alan</td>
+          <td>Jellybean</td>
+          <td>$3.76</td>
+        </tr>
+        <tr>
+          <td>Jonathan</td>
+          <td>Lollipop</td>
+          <td>$7.00</td>
+        </tr>
+        <tr>
+          <td>Jonathan</td>
+          <td>Lollipop</td>
+          <td>$7.00</td>
+        </tr>
+        <tr>
+          <td>Jonathan</td>
+          <td>Lollipop</td>
+          <td>$7.00</td>
+        </tr>
+        <tr>
+          <td>Jonathan</td>
+          <td>Lollipop</td>
+          <td>$7.00</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-</div>
+
+{{else}}
+  <div class="section container">
+      <h3>Welcome to Your Data Profile</h3>
+      <div class="row">
+        <div class="col l6 s12">
+          <div class="row">
+            <div class="col l12 s12 center-align">
+              <i class="material-icons large">border_clear</i>
+            </div>
+            <div class="col l12 s12 center-align place-map">
+              {{#if model.place}}
+                <p>{{model.place.name}}</p>
+                {{map-view underlying=model.place.underlying geom=model.place.geometry}}
+              {{else}}
+                {{#link-to 'places.search' class='waves-effect waves-light btn'}}Add a Place{{/link-to}}
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        <div class="col l6 s12">
+          <div class="row">
+            <div class="col l12 s12 center-align">
+              <i class="material-icons large">layers</i>
+            </div>
+            <div class="col l12 s12 center-align">
+              {{#if model.report}}
+                {{model.report.title}}
+              {{else}}
+                {{#link-to 'reports.search' class='waves-effect waves-light btn'}}Add a Report{{/link-to}}
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{{/if}}

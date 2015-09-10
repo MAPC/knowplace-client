@@ -36,6 +36,12 @@ $primary-color: color("pink", "lighten-2");
   margin: 0;
 }
 
+.place-map-profile {
+  height: 200px;
+  padding: 0 !important;
+  margin: 0;
+}
+
 .fill-map {
   padding: 0;
   margin: 0;
@@ -43,7 +49,18 @@ $primary-color: color("pink", "lighten-2");
 }
 
 .bread-crumbs {
+  background-color: rgba(35, 185, 169, .7);
   margin-bottom: 0px;
+  min-height:100px;
+}
+
+.bread-crumbs-fixed {
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  z-index:1000;
 }
 // .header {
 //   background-color: rgba(0,0,0,0);
