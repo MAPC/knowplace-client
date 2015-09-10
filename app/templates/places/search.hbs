@@ -6,13 +6,14 @@
       </form>
       <div class="collection">
       {{#each model as |place|}}
-        {{!-- <a class="collection-item"> --}}
         {{#link-to 'places.search.show' place class="collection-item"}}
           {{place.name}}: {{place.description}}
         {{/link-to}}
-        {{!-- </a> --}}
       {{/each}}
+
+      {{page-numbers content=pagedContent}}
       </div>
+      {{!-- {{#link-to '?page='}} --}}
     </div>
     <div class="col s12 m12 l6">
       {{outlet}}

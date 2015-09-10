@@ -1,15 +1,29 @@
 import Ember from 'ember';
 import ResetScrollMixin from 'neighborhood-drawing-tool/mixins/reset-scroll';
+import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 
-export default Ember.Route.extend(ResetScrollMixin, {
+export default Ember.Route.extend(RouteMixin, ResetScrollMixin, {
   queryParams: {
     q: {
       refreshModel: true
+    },
+    page: {
+      refreshModel: true
     }
   },
+  perPage: 10,
   model: function(params) {
-    // q should be "filter[name]"
-    return this.store.find("place", {q: params.q });
+    params.paramMapping = {page: "page[number]",
+                           perPage: "page[limit]"};
+    params["filter[search]"] = params.q;
+    delete params.q;
+    return this.findPaged("place", params);
+  },
+  resetController: function (controller) {
+    var queryParams = controller.get('queryParams');
+    queryParams.forEach(function (param) {
+      controller.set(param, null);
+    });
   },
   actions: { 
     savePlace: function(context) {
@@ -21,6 +35,8 @@ export default Ember.Route.extend(ResetScrollMixin, {
       profile.set("place", place);
       profile.save().then((profile) => {
         this.transitionTo("profile", profile);
+      }, (error) => {
+        console.log(error);
       });
         
 
