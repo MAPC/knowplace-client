@@ -2,12 +2,20 @@
   <div class="col s12">
     <h1>{{model.title}}</h1>
     <p>{{model.description}}</p>
-    DataPoints:
+    Data Points:
     <ul class="collection">
-      <li class="collection-item">Walkshed Score</li>
-      <li class="collection-item">WalkScore</li>
-      <li class="collection-item">Income</li>
-      <li class="collection-item">Households</li>
+      {{#each model.dataPoints as |dataPoint|}}
+        <li class="collection-item">{{dataPoint.name}}</li>
+      {{/each}}
+    </ul>
+    Data Collections:
+    <ul class="collection">
+      {{#each model.dataCollections as |dataCollection|}}
+        {{#each dataCollection.dataPoints as |dataPoint|}}
+          {{dataPoint.name}}
+        {{/each}}
+        <li class="collection-item">{{dataCollection.title}}</li>
+      {{/each}}
     </ul>
   </div>
   <div class="col s12">

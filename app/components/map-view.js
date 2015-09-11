@@ -67,6 +67,12 @@ export default Ember.Component.extend({
       this.map.fitBounds(intersectingGeos.getBounds());  
     } else {
       this.map.fitBounds(geometry.getBounds());
+      this.map.on("locationerror", function() {
+        alert("failed to locate");
+      });
+      map.on('locationfound', function() {
+        alert("location found");
+      });
     }
     
     this.set('previousLayer', geometry);
@@ -89,7 +95,7 @@ export default Ember.Component.extend({
     if (this.get("geom") !== null) {
       this.updateMap();
     } else {
-      this.map.locate({setView: true, maxZoom: 16});
+      this.map.setView([42.373611, -71.110556], 12).locate({setView: true, maxZoom: 16});
     }
   }
 });

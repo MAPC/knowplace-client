@@ -1,24 +1,24 @@
-{{!-- {{#if profile.started}} --}}
+{{#if profile.started}}
   <div class="row bread-crumbs valign-wrapper">
-
+    <div class="col l4 center valign">
       {{#if profile.hasPlace}}
         Step 1: Selected Place {{profile.place.name}}
       {{else}}
         Step 1: {{#link-to 'places.search'}}Create/Select Place{{/link-to}}
       {{/if}}
-        <i class="material-icons right large">keyboard_arrow_right</i>
-
-    <div class="col l4">
+        
+    </div>
+    <div class="col l4 center valign">
 
       {{#if profile.hasReport}}
         Step 2: Selected Place: {{profile.report.title}}
       {{else}}
-        Step 2: {{#link-to 'places.search'}}Create/Select Report{{/link-to}}
+        Step 2: {{#link-to 'reports.search'}}Create/Select Report{{/link-to}}
       {{/if}}
-        <i class="material-icons right large">keyboard_arrow_right</i>
+        
 
     </div>
-    <div class="col l4">
+    <div class="col l4 center valign">
       {{#if profile.completed}}
         Step 3: Profile Finished! {{#link-to 'profile' profile}}View Profile{{/link-to}}
       {{else}}
@@ -26,4 +26,4 @@
       {{/if}}
     </div>
   </div>
-{{!-- {{/if}}  --}}
+{{/if}} 

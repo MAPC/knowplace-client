@@ -22,8 +22,7 @@ export default Ember.Route.extend(ResetScrollMixin, {
   // }.observes('q'),
   model: function(params) {
     return Ember.RSVP.hash({
-      reports: this.store.query("report", {q: params.q }),
-      profiles: this.store.findAll('profile')
+      reports: this.store.find("report", {q: params.q, include: 'data-points,data-collections' })
     })
   },
   actions: { 

@@ -3,7 +3,9 @@
     <p class="flow-text"><strong>Focused Profile: {{model.title}}</strong></p>
     <div class="row">
       <div class="col l8 s12">
-        Icons
+        <div class="icon icon-economy economy left"> </div>
+        <div class="icon icon-transportation transportation left"> </div>
+        <div class="icon icon-arts-culture arts-culture left"> </div>
       </div>
       <div class="col l4 s12">
         <h3>{{model.place.name}}</h3>
@@ -12,114 +14,52 @@
     <div class="row">
       <div class="col l8 s12">
         <p class="flow-text">
-          Transit Oriented Development (TOD) is a strategy for developing residential and commercial areas in places that are already accessible by public transit.
-          {{model.report.description}}
+          Transit Oriented Development (TOD) is a strategy for developing residential and commercial areas in places that are already accessible by public transit. w{{model.report.description}}
         </p>
       </div>
       <div class="col l4 s12 place-map-profile">
-        {{map-view underlying=model.place.underlying geom=model.place.geometry}}
+        {{map-view zoomControl=false scrollWheelZoom=false underlying=model.place.underlying geom=model.place.geometry}}
       </div>
     </div>
-    <table class="responsive-table">
+    <table>
       <thead>
         <tr>
-            <th data-field="id">Name</th>
-            <th data-field="name">Item Name</th>
-            <th data-field="price">Item Price</th>
+            <th data-field="id">Data Point</th>
+            <th data-field="name">Estimate</th>
         </tr>
       </thead>
 
       <tbody>
+        {{#each evaluated.data as |data|}}
         <tr>
-          <td>Alvin</td>
-          <td>Eclair</td>
-          <td>$0.87</td>
+          <td>
+            {{#if data.relationships}}
+              <em>{{data.attributes.title}}</em>
+            {{else}}
+              {{data.attributes.title}}
+            {{/if}} 
+          </td>
+          <td>
+            <p>
+              {{#if data.attributes.value}}
+                {{add-commas data.attributes.value}} 
+                <sub class='{{moe-color data.attributes.value data.attributes.margin}}-text'> +/- {{data.attributes.margin}}</sub>
+              {{/if}}
+            </p>
+          </td>
         </tr>
-        <tr>
-          <td>Alan</td>
-          <td>Jellybean</td>
-          <td>$3.76</td>
-        </tr>
-        <tr>
-          <td>Jonathan</td>
-          <td>Lollipop</td>
-          <td>$7.00</td>
-        </tr>
-        <tr>
-          <td>Jonathan</td>
-          <td>Lollipop</td>
-          <td>$7.00</td>
-        </tr>
-        <tr>
-          <td>Jonathan</td>
-          <td>Lollipop</td>
-          <td>$7.00</td>
-        </tr>
-        <tr>
-          <td>Jonathan</td>
-          <td>Lollipop</td>
-          <td>$7.00</td>
-        </tr>
-        <tr>
-          <td>Alvin</td>
-          <td>Eclair</td>
-          <td>$0.87</td>
-        </tr>
-        <tr>
-          <td>Alan</td>
-          <td>Jellybean</td>
-          <td>$3.76</td>
-        </tr>
-        <tr>
-          <td>Jonathan</td>
-          <td>Lollipop</td>
-          <td>$7.00</td>
-        </tr>
-        <tr>
-          <td>Jonathan</td>
-          <td>Lollipop</td>
-          <td>$7.00</td>
-        </tr>
-        <tr>
-          <td>Jonathan</td>
-          <td>Lollipop</td>
-          <td>$7.00</td>
-        </tr>
-        <tr>
-          <td>Jonathan</td>
-          <td>Lollipop</td>
-          <td>$7.00</td>
-        </tr>
-        <tr>
-          <td>Alvin</td>
-          <td>Eclair</td>
-          <td>$0.87</td>
-        </tr>
-        <tr>
-          <td>Alan</td>
-          <td>Jellybean</td>
-          <td>$3.76</td>
-        </tr>
-        <tr>
-          <td>Jonathan</td>
-          <td>Lollipop</td>
-          <td>$7.00</td>
-        </tr>
-        <tr>
-          <td>Jonathan</td>
-          <td>Lollipop</td>
-          <td>$7.00</td>
-        </tr>
-        <tr>
-          <td>Jonathan</td>
-          <td>Lollipop</td>
-          <td>$7.00</td>
-        </tr>
-        <tr>
-          <td>Jonathan</td>
-          <td>Lollipop</td>
-          <td>$7.00</td>
-        </tr>
+          {{#each data.relationships.data-points.data as |collection|}}
+            <tr>
+              <td> &nbsp;  &nbsp; &nbsp;{{collection.attributes.title}}</td>
+              <td>
+                <p>
+                  {{add-commas collection.attributes.value}} 
+                  <sub class='{{moe-color collection.attributes.value collection.attributes.margin}}-text'> +/- {{collection.attributes.margin}}</sub>
+                </p>
+              </td>
+            </tr>
+          {{/each}}
+        {{/each}}
       </tbody>
     </table>
   </div>
