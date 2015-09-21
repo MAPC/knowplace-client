@@ -13,9 +13,12 @@ export default Ember.Route.extend(RouteMixin, ResetScrollMixin, {
   },
   model: function(params) {
     params.paramMapping = {page: "page[number]",
-                           perPage: "page[limit]"};
+                           perPage: "page[limit]",
+                          total_pages: "record-count"};
     params["filter[search]"] = params.q;
     delete params.q;
+    var secureData = this.get('session.secure');
+    console.log(secureData);
     return this.findPaged("place", params);
   },
   resetController: function (controller) {

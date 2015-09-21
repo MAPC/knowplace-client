@@ -6,11 +6,11 @@
       </form>
       <div class="collection">
       {{#each model as |place|}}
-        {{#link-to 'places.search.show' place class="collection-item"}}
+        {{#link-to 'places.search.show' place class="collection-item truncate"}}
           {{place.name}}: {{place.description}}
         {{/link-to}}
       {{/each}}
-
+      {{totalPagesBinding}}
       {{page-numbers content=pagedContent}}
       </div>
       {{!-- {{#link-to '?page='}} --}}

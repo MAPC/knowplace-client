@@ -2,6 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
+    host: "http://localhost:4200",
     modulePrefix: 'neighborhood-drawing-tool',
     environment: environment,
     baseURL: '/',
@@ -26,10 +27,10 @@ module.exports = function(environment) {
           'style-src': "'self' 'unsafe-inline'",
           'frame-src': "'none'"
         }
-
-  };
+  }
 
   if (environment === 'development') {
+    ENV.host = "http://localhost:4200/api"
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -38,29 +39,37 @@ module.exports = function(environment) {
   }
 
   if (environment === 'test') {
+    ENV.host = "http://knowplace.dev.mapc.org";
     // Testem prefers this...
-    ENV.baseURL = '/';
-    ENV.locationType = 'none';
+    // ENV.baseURL = '/';
+    // ENV.locationType = 'none';
 
-    // keep test console output quieter
-    ENV.APP.LOG_ACTIVE_GENERATION = false;
-    ENV.APP.LOG_VIEW_LOOKUPS = false;
+    // // keep test console output quieter
+    // ENV.APP.LOG_ACTIVE_GENERATION = false;
+    // ENV.APP.LOG_VIEW_LOOKUPS = false;
 
-    ENV.APP.rootElement = '#ember-testing';
+    // ENV.APP.rootElement = '#ember-testing';
   }
 
   if (environment === 'production') {
+    ENV.host = "http://knowplace.live.mapc.org";
 
   }
 
-  ENV['torii'] = {  
-      providers: {
-        'google-oauth2': {
-          apiKey: '104243762806-igcv4sp1s3guobk2tktpr3qogarqlj91.apps.googleusercontent.com',
-          redirectUri: 'http://localhost:4200'
-        }
-      }
-    };
+  ENV['simple-auth'] = {
+    crossOriginWhitelist: ['*'],
+    authorizer: 'authorizer:custom',
+    store: 'simple-auth-session-store:local-storage'
+  }
+
+  ENV['simple-auth-devise'] = {
+    tokenAttributeName: 'token',
+    identificationAttributeName: 'email',
+    serverTokenEndpoint: ENV.host + "/users/sign_in",
+    authorizer: 'simple-auth-authorizer:devise'
+  };
+
+
 
   return ENV;
 };

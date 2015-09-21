@@ -4,6 +4,7 @@ import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 export default Ember.Route.extend(ApplicationRouteMixin, {
   model: function() {
     // var profile = this.store.createRecord('profile');
+    
     return this.store.createRecord('profile');
   },
   actions: {

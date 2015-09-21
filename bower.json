@@ -21,7 +21,7 @@
     "ember-c3": "~0.1.5",
     "evispa-timo-jsclipper": "*",
     "concavehull": "~0.1.5",
-    "ember-simple-auth": "0.8.0",
+    "ember-simple-auth": "git@github.com:allthesignals/ember-simple-auth-component.git#~0.8.0",
     "atatus-js": "~2.2.4",
     "semantic-ui-divider": "~2.1.2"
   }

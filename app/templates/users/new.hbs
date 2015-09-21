@@ -1,0 +1,13 @@
+<form id="login" {{action 'register' model on='submit'}}>
+    <label for="identification">E-mail</label>
+    {{input id='email' placeholder='Enter Login'
+            value=model.email}}
+    <label for="password">Password</label>
+    {{input id='password' placeholder='Enter Password'
+            type='password' value=model.password}}
+    <label for="password_confirm">Password Conformation</label>
+    {{input id='password_confirm' placeholder='Enter Password Again'
+            type='password' value=model.password_confirm}}
+    <button id="submit" type="submit">Login</button>
+</form>
+{{outlet}}
