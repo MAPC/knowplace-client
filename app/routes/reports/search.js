@@ -29,6 +29,8 @@ export default Ember.Route.extend(ResetScrollMixin, {
     saveReport: function(context) {
       var report = context;
       var profile = this.modelFor("application");
+      var user = this.get('session').get('account');
+      profile.set("user", user);
       // place.save().then((model) => {
       // var profile = this.store.createRecord('profile', {});
       profile.set("report", report);

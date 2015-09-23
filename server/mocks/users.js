@@ -15,17 +15,20 @@ module.exports = function(app) {
   });
 
   usersRouter.post('/sign_in', function(req, res) {
+    var error = { "errors": [ "Wrong password.", "Unknown Username" ] };
     res.setHeader('Access-Control-Allow-Methods', 'POST');
-    var json = {"token": "softIceCream", "email": "mgardner@mapc.org" };
-    res.send(json);
+    var json = {"token": "softIceCream", "email": "mgardner@mapc.org", "user_id": 1 };
+    res.send(json).end();
   });
 
   usersRouter.get('/:id', function(req, res) {
-    res.send({
-      'users': {
-        id: req.params.id
-      }
-    });
+    var json = {"data":{"id":req.params.id,"type":"users","attributes":{"name":"Matt", "email": "mgardner@mapc.org", "token": "softIceCream" }, "links":{"self":"/users/1"}},"included":[]};
+    res.send(json);
+  });
+
+  usersRouter.patch('/:id', function(req, res) {
+    var json = {"data":{"id":req.params.id,"type":"users","attributes":{"name":"Matt", "email": "mgardner@mapc.org", "token": "softIceCream" }, "links":{"self":"/users/1"}},"included":[]};
+    res.send(json);
   });
 
   usersRouter.put('/:id', function(req, res) {

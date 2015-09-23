@@ -7,3 +7,9 @@
     <button {{action "savePlace" this.model}} class="waves-effect waves-light btn">Add Map</button>
   </div>
 </div>
+
+{{#unless session.isAuthenticated}}
+  {{#message-modal-component as |someAction|}}
+    {{user-authentication closeModal=someAction}}
+  {{/message-modal-component}}
+{{/unless}}

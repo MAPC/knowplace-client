@@ -23,3 +23,8 @@
     <a {{action "saveReport" model}} href="#!" class="modal-action modal-close waves-effect waves-green btn">Add to Profile</a>
   </div>
 </div>
+{{#unless session.isAuthenticated}}
+  {{#message-modal-component as |someAction|}}
+    {{user-authentication closeModal=someAction}}
+  {{/message-modal-component}}
+{{/unless}}

@@ -1,15 +1,17 @@
 <nav class="header black" role="navigation">
   <div class="nav-wrapper container">{{#link-to 'application'}}<a id="logo-container" href="" class="brand-logo"><i class="left material-icons">create</i>Neighborhood Drawing Tool</a>{{/link-to}}
     <ul class="right hide-on-med-and-down">
+      {{#if session.isAuthenticated}}
       <li>
-        {{#if session.isAuthenticated}}
-            {{#link-to 'logout'}}Logout{{/link-to}}
-        {{else}}
-            {{#link-to 'login'}}Login/Register{{/link-to}}
-        {{/if}}
+        {{session.account.email}}
       </li>
+      <li>
+        {{#link-to 'logout'}}Logout{{/link-to}}
+      </li>
+      {{else}}
+          {{#link-to 'login'}}Login/Register{{/link-to}}
+      {{/if}}
     </ul>
-
     <ul id="nav-mobile" class="side-nav">
       <li>
         {{#if session.isAuthenticated}}

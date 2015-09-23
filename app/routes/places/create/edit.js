@@ -1,8 +1,7 @@
 import Ember from 'ember';
-import UnauthenticatedRouteMixin from 'simple-auth/mixins/unauthenticated-route-mixin';
 import Session from 'simple-auth/session';
 
-export default Ember.Route.extend(UnauthenticatedRouteMixin, {
+export default Ember.Route.extend({
   model: function(params) {
     return this.store.findRecord("place", params.place_id)
   },

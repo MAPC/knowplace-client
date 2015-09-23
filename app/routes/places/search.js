@@ -29,12 +29,12 @@ export default Ember.Route.extend(RouteMixin, ResetScrollMixin, {
   },
   actions: { 
     savePlace: function(context) {
-      // alert("bubbled");
       var place = context;
       var profile = this.modelFor("application");
-      // place.save().then((model) => {
-        // var profile = this.store.createRecord('profile', {});
+      var user = this.get('session').get('account');
+
       profile.set("place", place);
+      profile.set("user", user);
       profile.save().then((responseProfile) => {
         if (profile.get("hasReport")) {
           this.transitionTo("profile", responseProfile);

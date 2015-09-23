@@ -5,5 +5,10 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     this.$('.modal-trigger').leanModal();
     this.$('#modal1').openModal();
+  },
+  actions: {
+    closeModal: function() {
+      this.$('#modal1').closeModal();
+    }
   }
 });
