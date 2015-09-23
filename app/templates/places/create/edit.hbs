@@ -1,8 +1,2 @@
 <h4>Step 2: Describe Your Place</h4>
 {{edit-place-form model=this.model profiles=this.profiles.profiles}}
-
-{{#unless session.isAuthenticated}}
-  {{#message-modal-component as |someAction|}}
-    {{user-authentication closeModal=someAction}}
-  {{/message-modal-component}}
-{{/unless}}

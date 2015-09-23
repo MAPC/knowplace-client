@@ -4,7 +4,8 @@ import ResetScrollMixin from 'neighborhood-drawing-tool/mixins/reset-scroll';
 export default Ember.Route.extend(ResetScrollMixin, {
   model: function() {
     return Ember.RSVP.hash({
-      place: this.store.createRecord('place', {})
+      place: this.store.createRecord('place', {}),
+      user: this.store.createRecord('user', {})
     });
   },
   actions: {

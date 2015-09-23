@@ -10,5 +10,8 @@ export default Ember.Component.extend({
     closeModal: function() {
       this.$('#modal1').closeModal();
     }
+  },
+  willDestroyElement: function () {
+    this.$('#modal1').closeModal();
   }
 });

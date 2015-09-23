@@ -1,1 +1,13 @@
+<form id="login" {{action 'register' user on='submit'}}>
+    <label for="identification">E-mail</label>
+    {{input id='email' placeholder='Enter Login'
+            value=user.email}}
+    <label for="password">Password</label>
+    {{input id='password' placeholder='Enter Password'
+            type='password' value=user.password}}
+    <label for="password_confirm">Password Conformation</label>
+    {{input id='password_confirm' placeholder='Enter Password Again'
+            type='password' value=user.password_confirm}}
+    <button id="submit" type="submit">Login</button>
+</form>
 {{yield}}
