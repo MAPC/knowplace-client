@@ -13,12 +13,8 @@
     "loader.js": "ember-cli/loader.js#3.2.1",
     "qunit": "~1.18.0",
     "ember-leaflet": "~0.6.1",
-    "ember-cartodb-adapter": "~0.4.0",
     "materialize": "~0.97.0",
     "leaflet-draw": "~0.2.4",
-    "leaflet.freedraw": "~1.2.0",
-    "evispa-timo-jsclipper": "*",
-    "concavehull": "~0.1.5",
     "ember-simple-auth": "0.8.0",
     "atatus-js": "~2.2.4",
     "semantic-ui-divider": "~2.1.2"
