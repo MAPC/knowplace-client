@@ -1,10 +1,15 @@
 <div class="row">
-  <div class="col s12 place-map">
-    {{model.name}}
-    {{map-view underlying=model.underlying geom=model.geometry}}
-  </div>
-  <div class="col s12">
-    <button {{action "savePlace" this.model}} class="waves-effect waves-light btn">Add Map</button>
+  <div class="col s12 card">
+    <div class="card-content">
+      <div class="place-map">
+        {{map-view underlying=model.underlying geom=model.geometry}}
+      </div>
+      <span class="card-title grey-text text-darken-4">{{model.name}}</span>
+      <p class="grey-text text-darken-2">{{model.description}}</p>
+    </div>
+    <div class="card-action">
+      <button {{action "savePlace" this.model}} class="waves-effect waves-light btn">Add Map</button>
+    </div>
   </div>
 </div>
 

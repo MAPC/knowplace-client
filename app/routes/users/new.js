@@ -10,8 +10,9 @@ export default Ember.Route.extend({
           var secure = this.get('session.secure');
           secure.token = user.get('token');
           secure.email = user.get('email');
-          console.log(secure.token);
+          secure.user_id = user.get('id');
           this.get('session').setup('simple-auth-authenticator:devise', secure, true);
+          this.transitionTo("application");
       });
     }
   }

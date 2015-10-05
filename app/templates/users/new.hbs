@@ -1,13 +1,46 @@
-<form id="login" {{action 'register' model on='submit'}}>
-    <label for="identification">E-mail</label>
-    {{input id='email' placeholder='Enter Login'
-            value=model.email}}
-    <label for="password">Password</label>
-    {{input id='password' placeholder='Enter Password'
-            type='password' value=model.password}}
-    <label for="password_confirm">Password Conformation</label>
-    {{input id='password_confirm' placeholder='Enter Password Again'
-            type='password' value=model.password_confirm}}
-    <button id="submit" type="submit">Login</button>
-</form>
-{{outlet}}
+<div class="container">
+    <h2 class="grey-text text-darken-4">Account Creation</h2>
+    <p class="grey-text text-darken-2">Please provide a few details to help us identify you.</p>
+    <form id="login" {{action 'register' model on='submit'}}>
+        <label for="email">E-mail</label>
+        {{input id='email' placeholder='Enter Login'
+                value=model.email}}
+        <label for="password">Password</label>
+        {{input id='password' placeholder='Enter Password'
+                type='password' value=model.password}}
+        <label for="password_confirm">Password Conformation</label>
+        {{input id='password_confirm' placeholder='Enter Password Again'
+                type='password' value=model.password_confirm}}
+        <div class="ui horizonal divider"></div>
+        <p class="grey-text text-darken-2">Please answer a few optional questions about yourself.</p>
+        <div class="input-field">
+            <p class="grey-text text-darken-2">Age Group:</p>
+            <select class="browser-default">
+              <option value="0-9">0-9</option>
+              <option value="10-19">10-19</option>
+              <option value="20-29">20-29</option>
+              <option value="30-39">30-39</option>
+              <option value="40-49">40-49</option>
+              <option value="50-59">50-59</option>
+              <option value="60-69">60-69</option>
+              <option value="70-79">70-79</option>
+              <option value="80+">80+</option>
+            </select>
+        </div>
+        <div class="input-field">
+            <p class="grey-text text-darken-2">Race and Ethnicity:</p>
+            <select class="browser-default">
+                <option value="Black">Black</option>
+                <option value="White">White</option>
+                <option value="Native">Native</option>
+                <option value="Asian">Asian</option>
+                <option value="Islander">Islander</option>
+                <option value="Hispanic">Hispanic</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="ui horizonal divider"></div>
+        <button class="btn waves-effect waves-light" id="submit" type="submit">Register</button>
+    </form>
+    {{outlet}}
+</div>

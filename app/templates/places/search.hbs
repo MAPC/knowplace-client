@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col s12 m12 l6">
+    <div class="col s12 m12 l3">
       <form {{action "search" on="submit"}}>
         {{input value=q placeholder="search"}}
       </form>
       <div class="collection">
       {{#each model as |place|}}
         {{#link-to 'places.search.show' place class="collection-item truncate"}}
-          {{place.name}}: {{place.description}}
+          {{place.name}}
         {{/link-to}}
       {{/each}}
       {{totalPagesBinding}}
@@ -15,7 +15,7 @@
       </div>
       {{!-- {{#link-to '?page='}} --}}
     </div>
-    <div class="col s12 m12 l6">
+    <div class="col s12 m12 l9">
       {{outlet}}
     </div>
   </div>

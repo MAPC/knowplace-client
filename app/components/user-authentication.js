@@ -5,8 +5,8 @@ export default Ember.Component.extend({
   actions: {
     authenticate: function() {
       var data = this.getProperties('identification', 'password');
-      console.log(data);
-      this.get('session').authenticate('simple-auth-authenticator:devise', { data: {user_email: "mgardner@mapc.org", password: "password" }}).then(
+
+      this.get('session').authenticate('authenticator:custom', { identification: data.identification, password: data.password }).then(
         () => {
           this.sendAction("closeModal");
         }, (error) => {

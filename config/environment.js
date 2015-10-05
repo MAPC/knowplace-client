@@ -60,14 +60,10 @@ module.exports = function(environment) {
     crossOriginWhitelist: ['*'],
     authorizer: 'authorizer:custom',
     session:    'session:custom-session',
-    store: 'simple-auth-session-store:local-storage'
-  }
-
-  ENV['simple-auth-devise'] = {
+    store: 'simple-auth-session-store:local-storage',
     tokenAttributeName: 'token',
     identificationAttributeName: 'email',
-    serverTokenEndpoint: ENV.host + "/users/sign_in",
-    authorizer: 'simple-auth-authorizer:devise'
+    serverTokenEndpoint: ENV.host + "/users/sign_in"
   };
 
 

@@ -33,5 +33,6 @@ export default DS.Model.extend({
     }
   }.property("report"),
   place: DS.belongsTo('place', { async: true }),
-  report: DS.belongsTo('report', { async: true })
+  report: DS.belongsTo('report', { async: true }),
+  user: DS.belongsTo('user', { async: true })
 });

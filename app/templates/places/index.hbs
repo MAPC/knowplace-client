@@ -3,7 +3,7 @@
     {{#each model as |place|}}
       {{!-- <a class="collection-item"> --}}
       {{#link-to 'places.search.show' place class="collection-item"}}
-        {{place.name}}: {{place.description}}
+        {{place.name}}
       {{/link-to}}
       {{!-- </a> --}}
     {{/each}}

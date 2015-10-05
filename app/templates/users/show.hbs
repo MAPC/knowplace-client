@@ -1,0 +1,11 @@
+<div class="container">
+  <h3>Welcome, {{model.email}}</h3>
+
+
+  <ul class="collection with-header">
+    <li class="collection-header"><h4>Profiles</h4></li>
+    {{#each model.profiles as |profile|}}
+      {{#link-to 'profile' profile class="collection-item"}}{{profile.title}}{{/link-to}}
+    {{/each}}
+  </ul>
+</div>

@@ -1,10 +1,16 @@
-<h3>Login Route</h3>  
-<form id="login" {{action 'authenticate' on='submit'}}>
-    <label for="identification">Login</label>
-    {{input id='identification' placeholder='Enter Login'
-            value=identification}}
-    <label for="password">Password</label>
-    {{input id='password' placeholder='Enter Password'
-            type='password' value=password}}
-    <button id="submit" type="submit">Login</button>
-</form>
+<div class="container">
+  <h3>Login</h3>  
+  <form id="login" {{action 'authenticate' on='submit'}}>
+      <label for="identification">Login</label>
+      {{input id='identification' placeholder='Enter Login'
+              value=identification}}
+      <label for="password">Password</label>
+      {{input id='password' placeholder='Enter Password'
+              type='password' value=password}}
+      <button id="submit" type="submit">Login</button>
+  </form>
+  <br/>
+  <div class="row divider">
+  </div>
+  {{#link-to 'users.new'}}Create a new account{{/link-to}}
+</div>

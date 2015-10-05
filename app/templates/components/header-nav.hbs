@@ -3,7 +3,7 @@
     <ul class="right hide-on-med-and-down">
       {{#if session.isAuthenticated}}
       <li>
-        {{session.account.email}}
+        {{#link-to 'users.show'}} {{session.account.email}} {{/link-to}}
       </li>
       <li>
         {{#link-to 'logout'}}Logout{{/link-to}}

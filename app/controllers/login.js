@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
   actions: {
       authenticate: function() {
         var data = this.getProperties('identification', 'password');
-        return this.get('session').authenticate('simple-auth-authenticator:devise', { data: {user_email: data.identification, password: data.password }}).then(() => {
+        return this.get('session').authenticate('authenticator:custom', { identification: data.identification, password: data.password }).then(() => {
           this.transitionToRoute("application");
         });
       }

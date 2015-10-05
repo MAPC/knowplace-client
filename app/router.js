@@ -40,7 +40,8 @@ Router.map(function() {
   this.route('login');
   this.route('protected');
 
-  this.route('users', function() {
+  this.resource('users', function() {
+    this.route('show', { path: '/me' });
     this.route('new');
   });
 });
