@@ -10,7 +10,8 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember test"
+    "test": "ember test",
+    "postinstall": "nvm use iojs && rm -rf node_modules && npm cache clean && npm install --save-dev broccoli-sass@0.6.0 && npm install"
   },
   "repository": "",
   "engines": {

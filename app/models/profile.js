@@ -32,6 +32,7 @@ export default DS.Model.extend({
       return false;
     }
   }.property("report"),
+  evaluation: DS.attr(),
   place: DS.belongsTo('place', { async: true }),
   report: DS.belongsTo('report', { async: true }),
   user: DS.belongsTo('user', { async: true })

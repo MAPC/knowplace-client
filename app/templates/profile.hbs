@@ -26,11 +26,12 @@
         <tr>
             <th data-field="id">Data Point</th>
             <th data-field="name">Estimate</th>
+            <th data-field="name">Units</th>
         </tr>
       </thead>
 
       <tbody>
-        {{#each evaluated.data as |data|}}
+        {{#each model.evaluation.data as |data|}}
         <tr>
           <td>
             {{#if data.relationships}}
@@ -47,6 +48,9 @@
               {{/if}}
             </p>
           </td>
+          <td>
+            {{data.attributes.aggregator}}
+          </td>
         </tr>
           {{#each data.relationships.data-points.data as |collection|}}
             <tr>
@@ -56,6 +60,9 @@
                   {{add-commas collection.attributes.value}} 
                   <sub class='{{moe-color collection.attributes.value collection.attributes.margin}}-text'> +/- {{collection.attributes.margin}}</sub>
                 </p>
+              </td>
+              <td>
+                {{collection.attributes.aggregator}}
               </td>
             </tr>
           {{/each}}
