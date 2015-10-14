@@ -1,104 +1,81 @@
 {{#if model.completed}}
   <div class="section container">
-    <p class="flow-text"><strong>Focused Profile: {{model.title}}</strong></p>
-    <div class="row">
-      <div class="col l8 s12">
-        <div class="icon icon-economy economy left"> </div>
-        <div class="icon icon-transportation transportation left"> </div>
-        <div class="icon icon-arts-culture arts-culture left"> </div>
+    <div class="card-panel">
+      <div class="place-map-profile">
+        {{map-view zoomControl=false scrollWheelZoom=false underlying=model.place.underlying geomo=model.place.geometry offset=true}}
+        <div class="profile-carousel-data-view">
+          <div class="table-container white">
+            <p class="flow-text"><strong>Focused Profile: {{model.title}}</strong></p>
+            <p>{{model.report.description}}</p>
+          </div>
+        </div>
       </div>
-      <div class="col l4 s12">
-        <h3>{{model.place.name}}</h3>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col l8 s12">
-        <p class="flow-text">
-          Transit Oriented Development (TOD) is a strategy for developing residential and commercial areas in places that are already accessible by public transit. w{{model.report.description}}
-        </p>
-      </div>
-      <div class="col l4 s12 place-map-profile">
-        {{map-view zoomControl=false scrollWheelZoom=false underlying=model.place.underlying geomo=model.place.geometry}}
-      </div>
-    </div>
-    <table class="data-table">
-      <thead>
-        <tr>
-            <th data-field="id">Data Point</th>
-            <th data-field="name">Estimate</th>
-        </tr>
-      </thead>
+      <table class="data-table striped">
+        <thead>
+          <tr>
+              <th data-field="buffer"></th>
+              <th data-field="id">Data Point</th>
+              <th data-field="name">Estimate</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        {{#each model.evaluation.data as |data|}}
-        <tr>
-          <td>
-            {{#if data.relationships}}
-              <em>{{data.attributes.title}}</em>
-            {{else}}
-              {{data.attributes.title}}
-            {{/if}} 
-          </td>
-          <td>
-            <p>
-              {{#if data.attributes.value}}
-                {{data-point value=data.attributes.value margin=data.attributes.margin aggregator=data.attributes.aggregator units=data.attributes.units}}
-              {{/if}}
-            </p>
-          </td>
-
-        </tr>
-          {{#each data.relationships.data-points.data as |collection|}}
+        <tbody>
+          {{#each model.evaluation.data as |data|}}
             <tr>
-              <td> &nbsp;  &nbsp; &nbsp;{{collection.attributes.title}}</td>
+              <td></td>
               <td>
-                {{collection.attributes.units}}
+                {{#if data.relationships}}
+                  <em>{{data.attributes.title}}</em>
+                {{else}}
+                  {{data.attributes.title}}
+                {{/if}} 
               </td>
               <td>
                 <p>
-                  {{data-point value=collection.attributes.value margin=collection.attributes.margin aggregator=data.attributes.aggregator units=collection.attributes.units}}
+                  {{#if data.attributes.value}}
+                    {{data-point value=data.attributes.value margin=data.attributes.margin aggregator=data.attributes.aggregator units=data.attributes.units}}
+                  {{/if}}
                 </p>
               </td>
             </tr>
+            {{#each data.relationships.data-points.data as |collection|}}
+              <tr>
+                <td> &nbsp;  &nbsp; &nbsp;{{collection.attributes.title}}</td>
+                <td>
+                  {{collection.attributes.units}}
+                </td>
+                <td>
+                  <p>
+                    {{data-point value=collection.attributes.value margin=collection.attributes.margin aggregator=data.attributes.aggregator units=collection.attributes.units}}
+                  </p>
+                </td>
+              </tr>
+            {{/each}}
           {{/each}}
-        {{/each}}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
-
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>About Margins of Error</h4>
+      <p>This number represents the margin of error (MOE), a measure of uncertainty, for this estimate.</p>
+      <p>Green indicates an MOE that is less than 15% of the estimate, and can be considered RELIABLE (in green text); orange indicates an MOE that is between 15% and 30% of the estimate and can be considered FAIR (in orange text); red indicates an MOE that is 30% or more of the estimate, and should be used with CAUTION (in red text).</p>
+      <p>For more detailed information about margins of error in ACS data, see this <a href="http://www.ofm.wa.gov/pop/acs/userguide/ofm_acs_user_guide.pdf">publication</a>.</p>
+    </div>
+  </div>
 {{else}}
-  <div class="section container">
-      <h3>Welcome to Your Data Profile</h3>
-      <div class="row">
-        <div class="col l6 s12">
-          <div class="row">
-            <div class="col l12 s12 center-align">
-              <i class="material-icons large">border_clear</i>
-            </div>
-            <div class="col l12 s12 center-align place-map">
-              {{#if model.place}}
-                <p>{{model.place.name}}</p>
-                {{map-view underlying=model.place.underlying geom=model.place.geometry}}
-              {{else}}
-                {{#link-to 'places.search' class='waves-effect waves-light btn'}}Add a Place{{/link-to}}
-              {{/if}}
-            </div>
-          </div>
-        </div>
-        <div class="col l6 s12">
-          <div class="row">
-            <div class="col l12 s12 center-align">
-              <i class="material-icons large">layers</i>
-            </div>
-            <div class="col l12 s12 center-align">
-              {{#if model.report}}
-                {{model.report.title}}
-              {{else}}
-                {{#link-to 'reports.search' class='waves-effect waves-light btn'}}Add a Report{{/link-to}}
-              {{/if}}
-            </div>
-          </div>
+  <div class="container section center-align">
+    <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
         </div>
       </div>
     </div>
+  </div>
 {{/if}}

@@ -1,13 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  value: null,
-  margin: null,
-  aggregator: null,
-  valuePresentable: function() {
-    return this.get("value");
-  }.property("value"),
-  marginPresentable: function() {
-    return this.get("value");
-  }.property("margin")
+  actions: {
+    openModal: function() {
+      $('#modal1').openModal();
+    }
+  }
 });
