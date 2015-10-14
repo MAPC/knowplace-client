@@ -21,7 +21,6 @@ nav {
       color: #444;
     }
   }
-  
 }
 
 nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
@@ -61,9 +60,19 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
   border-top:1px solid #e0e0e0;
 }
 
-.slider-height {
-  height: calc(100vh - 210px) !important;
+@media screen and ( min-height: 750px ){
+  .slider-height {
+    height: calc(100vh - 210px) !important;
+  }
 }
+
+@media screen and ( max-height: 750px ){
+  .slider-height {
+    height: 600px;
+  }
+}
+
+
 
 .place-map {
   height: 500px;
