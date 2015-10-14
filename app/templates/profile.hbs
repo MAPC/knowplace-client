@@ -18,15 +18,14 @@
         </p>
       </div>
       <div class="col l4 s12 place-map-profile">
-        {{map-view zoomControl=false scrollWheelZoom=false underlying=model.place.underlying geom=model.place.geometry}}
+        {{map-view zoomControl=false scrollWheelZoom=false underlying=model.place.underlying geomo=model.place.geometry}}
       </div>
     </div>
-    <table>
+    <table class="data-table">
       <thead>
         <tr>
             <th data-field="id">Data Point</th>
             <th data-field="name">Estimate</th>
-            <th data-field="name">Units</th>
         </tr>
       </thead>
 
@@ -43,26 +42,22 @@
           <td>
             <p>
               {{#if data.attributes.value}}
-                {{add-commas data.attributes.value}} 
-                <sub class='{{moe-color data.attributes.value data.attributes.margin}}-text'> +/- {{data.attributes.margin}}</sub>
+                {{data-point value=data.attributes.value margin=data.attributes.margin aggregator=data.attributes.aggregator units=data.attributes.units}}
               {{/if}}
             </p>
           </td>
-          <td>
-            {{data.attributes.aggregator}}
-          </td>
+
         </tr>
           {{#each data.relationships.data-points.data as |collection|}}
             <tr>
               <td> &nbsp;  &nbsp; &nbsp;{{collection.attributes.title}}</td>
               <td>
-                <p>
-                  {{add-commas collection.attributes.value}} 
-                  <sub class='{{moe-color collection.attributes.value collection.attributes.margin}}-text'> +/- {{collection.attributes.margin}}</sub>
-                </p>
+                {{collection.attributes.units}}
               </td>
               <td>
-                {{collection.attributes.aggregator}}
+                <p>
+                  {{data-point value=collection.attributes.value margin=collection.attributes.margin aggregator=data.attributes.aggregator units=collection.attributes.units}}
+                </p>
               </td>
             </tr>
           {{/each}}

@@ -2,9 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Handlebars.makeBoundHelper(function (est,moe) {
   var pct = moe / est;
+  console.log(pct);
   var threshholds = {
-    green: 15,
-    orange: 30
+    green: 0.15,
+    orange: 0.30
   }
 
   if (pct < threshholds.green) {

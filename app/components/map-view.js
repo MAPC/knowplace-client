@@ -4,7 +4,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   previousLayer: new L.featureGroup(),
   previousIntersectinGeos: new L.featureGroup(),
-  geom: null,
+  // geomo: null,
   // underlying: null,
   classNames: ['fill-map'],
   zoomControl: false,
@@ -39,17 +39,18 @@ export default Ember.Component.extend({
     }
   },
   intersectingGeos: function() {
+    console.log("intersectingGeos triggered");
     return new L.geoJson(this.get("underlying"), { style: this.get('styles').underlying });
   }.property("underlying"),
 
   geometry: function () {
-    return new L.geoJson(this.get("geom"), { style: this.get('styles').geometry });
-  }.property('geom'),
+    console.log("geometry property triggered");
+    return new L.geoJson(this.get("geomo"), { style: this.get('styles').geometry });
+  }.property('geomo'),
 
   updateMap: function() {
     //this observer should be refactored. console logging to see how often this is triggered.
-    console.log("Map component updated");
-
+    console.log("updateMap");
 
     var previousLayer = this.get('previousLayer');
     var previousIntersectinGeos = this.get('previousIntersectinGeos');
@@ -63,25 +64,32 @@ export default Ember.Component.extend({
     geometry.addTo(this.map);
 
     if (this.get("underlying")) {
-      // this.map.fitBounds(geometry.getBounds());
-      this.map.fitBounds(intersectingGeos.getBounds());  
+      console.log(intersectingGeos);
+      var bounds = intersectingGeos.getBounds();
+      this.map.fitBounds(bounds);  
+      if(this.get("offset")) {
+        var offset = this.map.getSize().x*0.2;
+        this.map.panBy(new L.Point(-offset, 0), {animate: false});
+      }
     } else {
-      this.map.fitBounds(geometry.getBounds());
-      this.map.on("locationerror", function() {
-        alert("failed to locate");
-      });
-      map.on('locationfound', function() {
-        alert("location found");
-      });
+      // this.map.fitBounds(geometry.getBounds());
     }
     
+
+
     this.set('previousLayer', geometry);
     this.set('previousIntersectinGeos', intersectingGeos);
 
-  }.observes('geometry'),
+  },
+
+  triggerRefresh: function() {
+    console.log("triggerRefresh");
+    this.updateMap();
+  }.observes('geomo'),
 
   didInsertElement: function() {
     //initial DOM rendering
+    console.log("didInsertElement");
     this.map = L.map(this.$('#map').get(0), {
       zoomControl: this.get("zoomControl"),
       scrollWheelZoom: this.get("scrollWheelZoom")
@@ -91,11 +99,12 @@ export default Ember.Component.extend({
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
       subdomains: 'abcd'
     }).addTo(this.map);
+    // this.map.setView([42.373611, -71.110556], 12);
+    this.updateMap();
 
-    if (this.get("geom") !== null) {
-      this.updateMap();
-    } else {
-      this.map.setView([42.373611, -71.110556], 12).locate({setView: true, maxZoom: 16});
-    }
+  },
+  willDestroyElement: function() {
+    console.log("willDestroyElement");
+    this.map.remove();
   }
 });

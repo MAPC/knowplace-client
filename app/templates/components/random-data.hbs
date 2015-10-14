@@ -1,0 +1,29 @@
+    <table class="data-table">
+      <thead>
+        <tr>
+            <th data-field="id">Data Point</th>
+            <th data-field="name">Estimate</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each randomData as |data-point|}}
+          <tr>
+            <td>
+              {{#if data-point.relationships}}
+                <em>{{data-point.attributes.title}}</em>
+              {{else}}
+                {{data-point.attributes.title}}
+              {{/if}} 
+            </td>
+            <td>
+              <p>
+                {{#if data-point.attributes.value}}
+                  {{data-point value=data-point.attributes.value margin=data-point.attributes.margin aggregator=data-point.attributes.aggregator units=data-point.attributes.units}}
+                {{/if}}
+              </p>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+{{yield}}

@@ -1,6 +1,5 @@
 @import 'bower_components/materialize/sass/components/color';
 @import 'bower_components/materialize/sass/components/variables';
-@import 'bower_components/semantic-ui-divider/divider.css';
  
 // Custom color settings go here 
 $primary-color: color("pink", "lighten-2");
@@ -16,6 +15,40 @@ $primary-color: color("pink", "lighten-2");
   height: 100%;
 }
 
+nav {
+  ul {
+    a {
+      color: #444;
+    }
+  }
+  
+}
+
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+  line-height: 80px;
+}
+
+.profile-carousel-data {
+  position: absolute;
+  top: 100px;
+  z-index: 997;
+  width: 100%;
+}
+
+.data-table {
+  font-weight: 300;
+  td {
+    padding: 0px;
+  }
+}
+
+.table-container {
+  width: 50%;
+  td {
+    padding: 0px;
+  }
+}
+
 .leaflet-control-attribution {
   display: none;
 }
@@ -25,11 +58,11 @@ $primary-color: color("pink", "lighten-2");
 }
 
 .divider {
-  border-top:1px solid #EEE;
+  border-top:1px solid #e0e0e0;
 }
 
 .slider-height {
-  height: calc(100vh - 290px) !important;
+  height: calc(100vh - 210px) !important;
 }
 
 .place-map {
@@ -69,11 +102,13 @@ $primary-color: color("pink", "lighten-2");
   font-size: 1.5em;
 }
 
-// .header {
-//   background-color: rgba(0,0,0,0);
-//   position: absolute;
-//   z-index: 1000;
-// }
+.header {
+  height:80px;
+}
+
+.navbar-fixed {
+  height:80px;
+}
 
 // .section-push {
 //   top: 50px;

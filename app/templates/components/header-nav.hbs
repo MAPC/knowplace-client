@@ -1,5 +1,5 @@
-<nav class="header black" role="navigation">
-  <div class="nav-wrapper container">{{#link-to 'application'}}<a id="logo-container" href="" class="brand-logo"><i class="left material-icons">create</i>Neighborhood Drawing Tool</a>{{/link-to}}
+<nav class="header white" role="navigation">
+  <div class="nav-wrapper container">{{#link-to 'application'}}<a id="logo-container" href="" class="brand-logo"><img src="images/knowplace-06.png"/></a>{{/link-to}}
     <ul class="right hide-on-med-and-down">
       {{#if session.isAuthenticated}}
       <li>
@@ -12,7 +12,7 @@
           {{#link-to 'login'}}Login/Register{{/link-to}}
       {{/if}}
     </ul>
-    <ul id="nav-mobile" class="side-nav">
+    <ul id="nav-mobile" class="side-nav black-text">
       <li>
         {{#if session.isAuthenticated}}
             {{#link-to 'logout'}}Logout{{/link-to}}

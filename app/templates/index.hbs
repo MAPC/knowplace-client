@@ -1,8 +1,22 @@
 <div class="slider-height">
-  {{map-view zoomControl=false scrollWheelZoom=false}}
+  {{map-view zoomControl=false scrollWheelZoom=false offset=true underlying=model.place.underlying geomo=model.place.geometry}}
+  <div class="profile-carousel-data">
+    <div class="container section">
+      <div class="card-panel table-container">
+        <p class="grey-text text-darken-3">Featured Profile:</p> 
+        <h4>{{model.title}}</h4>
+        Some aggregated data for {{model.place.name}}:
+        {{random-data data=model.evaluation.data}}
+        <div class="row divider">
+        </div>
+        <p>KnowPlace features dozens of reports on a number of topics for any area of your choosing. To start, search for or draw a place using the options below.</p>
+      </div>
+    </div>
+  </div>
+  {{!-- underlying=model.underlying geom=model.geometry --}}
 </div>
 <div class="container section">
-  <h5>The Neighborhood Drawing Tool features dozens of reports on a number of topics for any area of your choosing. To start, search for or draw a place:</h5>
+  
   <div class="row">
     <form class="col s12" {{action "search" on="submit"}}>
       <div class="row">
