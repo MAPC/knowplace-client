@@ -126,5 +126,7 @@ export default Ember.Component.extend({
       subdomains: 'abcd',
     }).addTo(this.map);
 
+    $('.leaflet-draw-draw-polygon').tooltip({'data-tooltip': "Test"})
+
   }
 });
