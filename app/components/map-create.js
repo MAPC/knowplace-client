@@ -102,5 +102,9 @@ export default Ember.Component.extend({
       subdomains: 'abcd',
     }).addTo(this.map);
 
+  },
+  willDestroyElement: function() {
+    console.log("willDestroyElement");
+    this.map.remove();
   }
 });
