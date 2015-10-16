@@ -5,7 +5,10 @@
         {{map-view zoomControl=false scrollWheelZoom=false underlying=model.place.underlying geomo=model.place.geometry offset=true}}
         <div class="profile-carousel-data-view">
           <div class="table-container white">
-            <p class="flow-text"><strong>Focused Profile: {{model.title}}</strong></p>
+            <p>
+              Focused Profile
+            </p>
+            <h5>{{model.title}}</h5>
             <p>{{model.report.description}}</p>
           </div>
         </div>
@@ -13,7 +16,7 @@
       <table class="data-table striped">
         <thead>
           <tr>
-              <th data-field="buffer"></th>
+              {{!-- <th data-field="buffer"></th> --}}
               <th data-field="id">Data Point</th>
               <th data-field="name">Estimate</th>
           </tr>
@@ -21,36 +24,49 @@
 
         <tbody>
           {{#each model.evaluation.data as |data|}}
-            <tr>
-              <td></td>
-              <td>
-                {{#if data.relationships}}
-                  <em>{{data.attributes.title}}</em>
-                {{else}}
-                  {{data.attributes.title}}
-                {{/if}} 
-              </td>
-              <td>
-                <p>
-                  {{#if data.attributes.value}}
-                    {{data-point value=data.attributes.value margin=data.attributes.margin aggregator=data.attributes.aggregator units=data.attributes.units}}
-                  {{/if}}
-                </p>
-              </td>
-            </tr>
-            {{#each data.relationships.data-points.data as |collection|}}
+            {{!-- Render a data collection --}}
+            {{#if data.relationships.data-points}} 
               <tr>
-                <td> &nbsp;  &nbsp; &nbsp;{{collection.attributes.title}}</td>
-                <td>
-                  {{collection.attributes.units}}
-                </td>
-                <td>
-                  <p>
-                    {{data-point value=collection.attributes.value margin=collection.attributes.margin aggregator=data.attributes.aggregator units=collection.attributes.units}}
-                  </p>
+                <td colspan="2">
+                  <h5>{{data.attributes.title}}</h5>
                 </td>
               </tr>
-            {{/each}}
+              {{#each data.relationships.data-points.data as |data_point|}}
+                <tr>
+                  <td>
+                    {{data_point.attributes.title}}
+                  </td>
+                  <td>
+                  {{data-point
+                      value=data_point.attributes.value
+                      margin=data_point.attributes.margin
+                      aggregator=data_point.attributes.aggregator
+                      units=data_point.attributes.units}}
+                  </td>
+                </tr>
+                {{/each}}
+              
+            {{/if}}
+          {{/each}}
+          </tbody>
+
+          <tbody>
+            {{#each model.evaluation.data as |data|}}
+              {{#unless data.relationships.data-points}} 
+              {{!-- Render a data point      --}}
+              <tr>
+                <td>
+                  {{data.attributes.title}}
+                </td>
+                <td>
+                  {{data-point
+                      value=data.attributes.value
+                      margin=data.attributes.margin
+                      aggregator=data.attributes.aggregator
+                      units=data.attributes.units}}
+                </td>
+              </tr>
+            {{/unless}}
           {{/each}}
         </tbody>
       </table>
