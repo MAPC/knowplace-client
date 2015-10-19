@@ -69,7 +69,8 @@ export default Ember.Component.extend({
         },
         edit: {
           edit: true,
-          featureGroup: featureGroup
+          featureGroup: featureGroup,
+          remove: false
         }
     };
 
