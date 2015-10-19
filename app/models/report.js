@@ -5,6 +5,6 @@ export default DS.Model.extend({
   description: DS.attr('string'),
   official: DS.attr('boolean', { defaultValue: false }),
   profile: DS.hasMany('profile', { async: true }),
-  dataPoints: DS.hasMany('data-point', { async: false }),
-  dataCollections: DS.hasMany('data-collection', { async: false })
+  dataPoints: DS.hasMany('data-point', { async: false, polymorphic: true }),
+  dataCollections: DS.hasMany('data-collection', { async: false, polymorphic: true })
 });

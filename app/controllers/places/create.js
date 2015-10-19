@@ -10,7 +10,8 @@ export default Ember.Controller.extend({
       this.get('model.place').save().then((model) => {
         this.transitionToRoute("places.create.edit", model);
       }, (error) => {
-        console.log(error);
+        var message = error.errors.join(", ");
+        this.set('errorMessage', message);
       });
     },
     drawEdit:function(update) {

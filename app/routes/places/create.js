@@ -14,10 +14,13 @@ export default Ember.Route.extend(ResetScrollMixin, {
       var user = this.get('session').get('account');
       var place = this.modelFor("places.create").place;
       var profile = this.modelFor("application");
+
+      place.set("completed", true);
       
       place.save().then((model) => {
         profile.set("place", place);
         profile.set("user", user);
+
         profile.save().then((responseProfile) => {
           if (profile.get("hasReport")) {
             this.transitionTo("profile", responseProfile);
@@ -27,21 +30,23 @@ export default Ember.Route.extend(ResetScrollMixin, {
         });
       }, (error) => {
         console.log(error);
-      });
-    },
-    relateProfile: function(profile_id, place) {
-      var user = this.modelFor("application");
-      console.log(this.get("session").get("account").id);
-      this.store.findRecord('profile', profile_id).then((profile) => {
-        place.save().then((place) => {
-          profile.set("place", place);
-          profile.save().then((profile) => {
-            this.transitionTo("profile", profile);
-          }, (error) => {
-            console.log(error);
-          });
-        });
+        var message = error.errors.map(function(el) { return el.detail; }).join(", ");
+        this.controllerFor('places.create.edit').set('errorMessage', message);
       });
     }
+    // relateProfile: function(profile_id, place) {
+    //   var user = this.modelFor("application");
+    //   console.log(this.get("session").get("account").id);
+    //   this.store.findRecord('profile', profile_id).then((profile) => {
+    //     place.save().then((place) => {
+    //       profile.set("place", place);
+    //       profile.save().then((profile) => {
+    //         this.transitionTo("profile", profile);
+    //       }, (error) => {
+    //         console.log(error);
+    //       });
+    //     });
+    //   });
+    // }
   }
 });

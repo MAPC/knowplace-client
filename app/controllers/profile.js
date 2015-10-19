@@ -1,6 +1,13 @@
 import Ember from 'ember';
+import pagedArray from 'ember-cli-pagination/computed/paged-array';
 
 export default Ember.Controller.extend({
-  queryParams: ['include'],
-  include: "place"
+  queryParams: ['include', 'page'],
+  include: "place",
+  page: 1,
+  perPage: 10,
+  filteredContent: Ember.computed.filterBy('content', 'isCompleted', false),
+  pagedContent: pagedArray('filteredContent'),
+  pageBinding: "pagedContent.page",
+  perPageBinding: "pagedContent.perPage"
 });
