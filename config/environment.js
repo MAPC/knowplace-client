@@ -51,6 +51,10 @@ module.exports = function(environment) {
     // ENV.APP.rootElement = '#ember-testing';
   }
 
+  if (environment === 'prep') {
+    ENV.host = "http://knowplace.prep.mapc.org";
+  }
+
   if (environment === 'production') {
     ENV.host = "http://knowplace.live.mapc.org";
 
