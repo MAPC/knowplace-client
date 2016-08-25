@@ -21,7 +21,7 @@ module.exports = function(environment) {
           'default-src': "'none'",
           'script-src': "'self' 'unsafe-inline' 'unsafe-eval'",
           'font-src': "'self'",
-          'connect-src': "'self'",
+          'connect-src': "'self' http://api.lvh.me:5000/",
           'img-src': "'self'",
           'report-uri':"'localhost'",
           'style-src': "'self' 'unsafe-inline'",
@@ -30,7 +30,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'development') {
-    ENV.host = "http://localhost:4200/api"
+    ENV.host = "http://api.lvh.me:5000"
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -52,7 +52,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'prep') {
-    ENV.host = "http://knowplace.prep.mapc.org";
+    ENV.host = "http://api.knowplace.mapc.org";
   }
 
   if (environment === 'production') {
