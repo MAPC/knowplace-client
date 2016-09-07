@@ -58,7 +58,7 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV.locationType = 'hash';
     ENV.baseUrl = '/neighborhood-drawing-tool/';
-    ENV.host = "http://knowplace.live.mapc.org";
+    ENV.host = "http://api.knowplace.us";
 
   }
 
