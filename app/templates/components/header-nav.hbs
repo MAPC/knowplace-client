@@ -1,5 +1,9 @@
 <nav class="header white" role="navigation">
-  <div class="nav-wrapper container">{{#link-to 'application'}}<a id="logo-container" href="" class="brand-logo"><img src="images/knowplace-06.png"/></a>{{/link-to}}
+  <div class="nav-wrapper container">
+    {{!-- <a id="logo-container" href="" class="brand-logo black-text valign-wrapper"> --}}
+    {{#link-to 'application' class="brand-logo black-text"}}
+      <img src="images/knowplace-06.png"/ style="vertical-align:middle;"><span style="font-size: 0.5em">Beta</span>
+    {{/link-to}}
     <ul class="right hide-on-med-and-down">
       {{#if session.isAuthenticated}}
       <li>
@@ -8,8 +12,16 @@
       <li>
         {{#link-to 'logout'}}Logout{{/link-to}}
       </li>
+      <li>
+        {{#link-to 'about'}}About{{/link-to}}
+      </li>
       {{else}}
+        <li>
           {{#link-to 'login'}}Login/Register{{/link-to}}
+        </li>
+        <li>
+          {{#link-to 'about'}}About{{/link-to}}
+        </li>
       {{/if}}
     </ul>
     <ul id="nav-mobile" class="side-nav black-text">
@@ -19,6 +31,9 @@
         {{else}}
             {{#link-to 'login'}}Login/Register{{/link-to}}
         {{/if}}
+      </li>
+      <li>
+        {{#link-to 'about'}}About{{/link-to}}
       </li>
     </ul>
     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>

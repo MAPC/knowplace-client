@@ -39,7 +39,7 @@ Router.map(function() {
   this.route('logout');
   this.route('login');
   this.route('protected');
-
+  this.route('about');
   this.resource('users', function() {
     this.route('show', { path: '/me' });
     this.route('new');
