@@ -41,7 +41,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+At MAPC the Knowplace API lives on Heroku and the Knowplace client lives on live.mapc.org. In order to deploy the client you should clone this repo, and then edit `config/environment.js` to point to the DNS address of the KnowPlace API. Typically this is `ENV.host = "http://api.knowplace.us"` and that address can be changed to point to whatever server the KnowPlace API can be deployed to via GoDaddy by contacting `ithelp@mapc.org`. After building the app someone with appropriate server access can deploy it by using rsync: `rsync -r dist/ knowplace-client@live.mapc.org:/var/www/knowplace-client`. 
 
 ## Further Reading / Useful Links
 
